@@ -8,6 +8,8 @@ declare global {
       DB_PORT: string
 
       PORT: string
+
+      MONGODB_URI: string
     }
   }
 }
