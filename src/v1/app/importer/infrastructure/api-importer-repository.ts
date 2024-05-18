@@ -3,15 +3,15 @@ import cliProgress from 'cli-progress'
 
 // BrandModel
 import { generateBrandModelBulkInsertDTO } from '@/v1/app/importer/domain/brand-model/brand-model'
-import { BrandModelDTO } from '@/v1/app/importer/domain/brand-model/brand-model-dto'
+import { BrandModelDTO } from '@/v1/app/shared/application/brand-model/brand-model-dto'
 
 // Vehicle
 import { generateVehicleBulkInsertDTO } from '@/v1/app/importer/domain/vehicle/vehicle'
-import { VehicleDTO } from '@/v1/app/importer/domain/vehicle/vehicle-dto'
+import { VehicleDTO } from '@/v1/app/shared/application/vehicle/vehicle-dto'
 
 // VehicleTechnicalData
 import { generateVehicleTechnicalDataBulk } from '@/v1/app/importer/domain/vehicle-technical-data/vehicle-technical-data'
-import { VehicleTechnicalDataDTO } from '@/v1/app/importer/domain/vehicle-technical-data/vehicle-technical-data-dto'
+import { VehicleTechnicalDataDTO } from '@/v1/app/shared/application/vehicle-technical-data/vehicle-technical-data-dto'
 
 // Domain
 import { RowProccessed } from '@/v1/app/importer/domain/importer'

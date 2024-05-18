@@ -1,4 +1,4 @@
-import { VehicleSchema } from '@/v1/app/importer/domain/vehicle/vehicle-schema'
+import { VehicleSchema } from '@/v1/app/shared/application/vehicle/vehicle-schema'
 import mongoose from 'mongoose'
 
 export type FechaMatriculaDTO = {

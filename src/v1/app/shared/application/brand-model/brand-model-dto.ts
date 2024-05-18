@@ -1,4 +1,4 @@
-import { BrandModelSchema } from '@/v1/app/importer/domain/brand-model/brand-model-schema'
+import { BrandModelSchema } from '@/v1/app/shared/application/brand-model/brand-model-schema'
 import mongoose from 'mongoose'
 
 export const BrandModelDTO = mongoose.model('BrandModel', BrandModelSchema, 'BrandModel')
