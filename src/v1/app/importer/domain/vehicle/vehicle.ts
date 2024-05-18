@@ -1,6 +1,6 @@
 import { RowProccessed } from '@/v1/app/importer/domain/importer'
 import { generateVehicleTechnicalDataMask } from '@/v1/app/importer/domain/vehicle-technical-data/vehicle-technical-data'
-import { VehicleBulkInsertDTO } from '@/v1/app/shared/application/vehicle/vehicle-dto'
+import { VehicleBulkInsertDTO } from '@/v1/app/shared/domain/vehicle/vehicle-dto'
 
 const generateVehicleOne = ({ row }: { row: RowProccessed }) => {
   const mascara = generateVehicleTechnicalDataMask({ row })
