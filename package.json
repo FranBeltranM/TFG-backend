@@ -4,6 +4,7 @@
     "url": "https://github.com/FranBeltranM/TFG-2024/issues"
   },
   "dependencies": {
+    "cli-progress": "^3.12.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "4.18.3",
@@ -16,6 +17,7 @@
   },
   "description": "New project degree",
   "devDependencies": {
+    "@types/cli-progress": "^3.11.5",
     "@types/cors": "^2.8.17",
     "@types/express": "4.17.21",
     "@types/supertest": "^6.0.2",
@@ -49,13 +51,12 @@
     "url": "git+https://github.com/FranBeltranM/TFG-2024.git"
   },
   "scripts": {
-    "dev": "NODE_ENV=env ts-node-dev -r tsconfig-paths/register --ignore-watch node_modules ./src/index.ts",
-    "dev:importer": "NODE_ENV=env tsx watch --ignore node_modules ./src/importer.ts",
+    "dev": "NODE_ENV=env tsx watch --ignore node_modules ./src/index.ts",
+    "dev:importer": "NODE_ENV=env tsx watch --max-old-space-size=8192 --ignore node_modules ./src/importer.ts",
     "dev:test": "NODE_ENV=env tsx watch --ignore node_modules ./src/test.ts",
     "lint": "ts-standard",
-    "start": "node build/src/index.js",
+    "start": "tsx ./src/index.ts",
     "tsc": "tsc"
   },
-  "type": "module",
   "version": "1.0.0"
 }
