@@ -1,4 +1,4 @@
-import { RowProccessed } from '@/helpers/importer/parser-datafiles'
+import { RowProccessed } from '@/v1/app/importer/domain/importer'
 
 const generateBrandModelOne = ({ row }: { row: RowProccessed }) => {
   const brandModelFilter = {

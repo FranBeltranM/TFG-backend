@@ -1,9 +1,6 @@
 // Libs
 import cliProgress from 'cli-progress'
 
-// Helpers
-import { RowProccessed } from '@/helpers/importer/parser-datafiles'
-
 // BrandModel
 import { generateBrandModelBulkInsertDTO } from '@/v1/app/importer/domain/brand-model/brand-model'
 import { BrandModelDTO } from '@/v1/app/importer/domain/brand-model/brand-model-dto'
@@ -17,6 +14,7 @@ import { generateVehicleTechnicalDataBulk } from '@/v1/app/importer/domain/vehic
 import { VehicleTechnicalDataDTO } from '@/v1/app/importer/domain/vehicle-technical-data/vehicle-technical-data-dto'
 
 // Domain
+import { RowProccessed } from '@/v1/app/importer/domain/importer'
 import { ImporterRepository } from '@/v1/app/importer/domain/importer-repository'
 
 export class ApiImportRepository implements ImporterRepository {

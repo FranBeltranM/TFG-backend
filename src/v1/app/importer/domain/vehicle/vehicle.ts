@@ -1,4 +1,4 @@
-import { RowProccessed } from '@/helpers/importer/parser-datafiles'
+import { RowProccessed } from '@/v1/app/importer/domain/importer'
 import { generateVehicleTechnicalDataMask } from '@/v1/app/importer/domain/vehicle-technical-data/vehicle-technical-data'
 import { VehicleBulkInsertDTO } from '@/v1/app/importer/domain/vehicle/vehicle-dto'
 

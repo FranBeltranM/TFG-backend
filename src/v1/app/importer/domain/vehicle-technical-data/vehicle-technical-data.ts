@@ -1,4 +1,4 @@
-import { RowProccessed } from '@/helpers/importer/parser-datafiles'
+import { RowProccessed } from '@/v1/app/importer/domain/importer'
 
 export const generateVehicleTechnicalDataMask = ({ row }: { row: RowProccessed }) => {
   const fields = [

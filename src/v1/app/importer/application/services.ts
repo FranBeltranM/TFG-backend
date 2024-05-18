@@ -4,7 +4,7 @@ import { importVehicleBulk } from '@/v1/app/importer/application/import-vehicle'
 import { importVehicleTechnicalDataBulk } from '@/v1/app/importer/application/import-vehicle-techincal-data'
 
 // Domain
-import { RowProccessed } from '@/helpers/importer/parser-datafiles'
+import { RowProccessed } from '@/v1/app/importer/domain/importer'
 
 // Infrastructure
 import { ApiImportRepository } from '@/v1/app/importer/infrastructure/api-importer-repository'

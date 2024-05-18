@@ -6,9 +6,10 @@ import readline from 'readline'
 import { connectToMongo, disconnectFromMongo } from '@/mongo'
 
 // Utils
-import { formatRowAllFields } from '@/helpers/importer/formatRows'
-import { RowProccessed } from '@/helpers/importer/parser-datafiles'
 import { logError, logInfo, logWarn } from '@/helpers/utils'
+
+// Domain
+import { RowProccessed, formatRowAllFields } from '@/v1/app/importer/domain/importer'
 
 // Services
 import {
