@@ -65,3 +65,8 @@ Si tienes preguntas o sugerencias sobre el proyecto, no dudes en contactarme por
 
 - [https://www.youtube.com/watch?v=RayDPBYou4I](https://www.youtube.com/watch?v=RayDPBYou4I)
 - [https://www.freecodecamp.org/news/rest-api-design-best-practices-build-a-rest-api/](https://www.freecodecamp.org/news/rest-api-design-best-practices-build-a-rest-api/)
+
+### Fuente PM2
+
+- [https://pm2.keymetrics.io/docs/usage/cluster-mode/](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
+- [https://futurestud.io/tutorials/pm2-use-tsx-to-start-your-app](https://futurestud.io/tutorials/pm2-use-tsx-to-start-your-app)
