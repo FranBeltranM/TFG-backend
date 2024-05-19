@@ -306,9 +306,57 @@
             "description": "Datos de un vehículo, su historial y su información técnica"
           },
           "400": {
-            "description": "Parámetros incorrectos"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "message": "VIN must be at least 6 characters long",
+                      "success": false
+                    },
+                    {
+                      "message": "VIN must be at most 17 characters long",
+                      "success": false
+                    }
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "value": "VIN incorrecto"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bastidor incorrecto"
           },
           "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Vehicle not found",
+                    "success": false
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "value": "Vehicle not found"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
             "description": "Vehículo no encontrado"
           }
         },
