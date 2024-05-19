@@ -60,3 +60,8 @@ Si tienes preguntas o sugerencias sobre el proyecto, no dudes en contactarme por
 - [https://superuser.com/questions/168749/is-there-a-way-to-see-any-tar-progress-per-file](https://superuser.com/questions/168749/is-there-a-way-to-see-any-tar-progress-per-file)
 - [MongoDump](https://www.mongodb.com/docs/database-tools/mongodump/)
 - [MongoRestore](https://www.mongodb.com/docs/database-tools/mongorestore/)
+
+### Fuente Explicación Swagger
+
+- [https://www.youtube.com/watch?v=RayDPBYou4I](https://www.youtube.com/watch?v=RayDPBYou4I)
+- [https://www.freecodecamp.org/news/rest-api-design-best-practices-build-a-rest-api/](https://www.freecodecamp.org/news/rest-api-design-best-practices-build-a-rest-api/)
