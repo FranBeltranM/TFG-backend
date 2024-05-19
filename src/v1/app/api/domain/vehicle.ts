@@ -44,7 +44,6 @@ const formatIndicatorPersonaFisicaJuridica = (indicator: string | boolean | null
 }
 
 export const ensureVehicleVinIsValid = ({ vin }: { vin: string | null }) => {
-  console.log('Validating VIN:', vin)
   const vinSchema = z.object({
     vin: z
       .string({
