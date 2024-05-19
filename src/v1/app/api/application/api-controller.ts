@@ -15,10 +15,10 @@ export const getVehicleFromVin = async (req: Request, res: Response) => {
     const query = req.query as { vin: string }
     const validation = ensureVehicleVinIsValid({ ...query })
 
-    if (!validation) {
+    if (typeof validation !== 'string') {
       res.status(400).json({
         success: false,
-        message: 'VIN is required',
+        message: validation.error.message,
       })
       return
     }

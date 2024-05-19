@@ -59,10 +59,12 @@ export const ensureVehicleVinIsValid = ({ vin }: { vin: string | null }) => {
   })
 
   if (!vinValidation.success) {
-    return null
+    return {
+      error: vinValidation.error.errors[0],
+    }
   }
 
-  return vin
+  return vinValidation.data.vin
 }
 
 export const formatVehicleDataResult = ({ vehicleData }: { vehicleData: VehicleObject }): VehicleObjectFormatted => {
