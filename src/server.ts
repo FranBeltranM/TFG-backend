@@ -22,11 +22,6 @@ export class Server {
 
   listening = () => this.app.listen(this.port, () => console.log(`🚀 Server running on port ${this.port}`))
 
-  // connectDB = () => {
-  //   const db = new Database()
-  //   db.open()
-  // }
-
   routes = () => {
     this.app.use(cors({ origin: '*' }))
     this.app.use('/api/v1', routesV1)
