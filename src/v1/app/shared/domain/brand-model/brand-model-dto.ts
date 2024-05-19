@@ -23,3 +23,15 @@ export type BrandModelBuklInsertDTO = {
     upsert: mongoose.Schema.Types.Boolean | boolean
   }
 }
+
+export interface BrandModelObject {
+  _id: string
+  marca_itv: string
+  wmi: string
+  vds: string
+  modelo_itv: string[]
+}
+
+export type BrandModelObjectFormatted = Omit<BrandModelObject, '_id'> & {
+  id: string
+}

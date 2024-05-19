@@ -1,6 +1,94 @@
 import { VehicleSchema } from '@/v1/app/shared/domain/vehicle/vehicle-schema'
 import mongoose from 'mongoose'
 
+type FechaMatricula = {
+  fecha: Date
+}
+
+type Indicadores = {
+  precinto: string | boolean | null
+  embargo: string | boolean | null
+  baja_definitiva: string | boolean | null
+  baja_temporal: string | boolean | null
+  sustraccion: string | boolean | null
+  baja_telematica: string | boolean | null
+  nuevo_usado: string | boolean | null
+  persona_fisica_juridica: string | boolean | null
+  renting: string | boolean | null
+  tutela: string | boolean | null
+  fecha: Date
+}
+
+type BaseElement = {
+  fecha: Date
+  valor: string | number
+}
+
+type Transferencia = {
+  clave_tramite: string
+  codigo_postal: number
+
+  municipio: string
+
+  fecha_tramitacion: Date
+  fecha_tramite: Date
+}
+
+export interface VehicleObject {
+  _id: string
+
+  bastidor_itv: string
+  wmi: string
+  vds: string
+  mascara_ficha_tecnica: string
+
+  fecha_matricula: FechaMatricula
+  fecha_primera_matriculacion: FechaMatricula[]
+
+  codigo_provincia_matriculacion: BaseElement[]
+  codigo_clase_matricula: BaseElement[]
+  codigo_provincia_vehiculo: BaseElement[]
+  codigo_municipio_ine_vehiculo: BaseElement[]
+  codigo_procedencia_itv: BaseElement[]
+
+  localidad_vehiculo: BaseElement[]
+
+  codigo_tipo: BaseElement[]
+
+  numero_transmisiones: BaseElement[]
+  numero_titulares: BaseElement[]
+
+  codigo_itv: BaseElement[]
+
+  servicio: BaseElement[]
+
+  indicadores: Indicadores[]
+
+  transferencias: Transferencia[]
+}
+
+export type VehicleObjectFormatted = Omit<
+  VehicleObject,
+  | '_id'
+  | 'codigo_provincia_matriculacion'
+  | 'codigo_clase_matricula'
+  | 'codigo_provincia_vehiculo'
+  | 'codigo_municipio_ine_vehiculo'
+  | 'codigo_procedencia_itv'
+  | 'fecha_primera_matriculacion'
+> & {
+  id: string
+
+  provincia_matriculacion: BaseElement[]
+  clase_matricula: BaseElement[]
+  provincia_vehiculo: BaseElement[]
+  municipio_ine_vehiculo: BaseElement[]
+  procedencia_itv: BaseElement[]
+
+  fecha_primera_matriculacion: FechaMatricula[] | null
+}
+
+// DTOs
 export type FechaMatriculaDTO = {
   fecha: mongoose.Schema.Types.Date | Date
 }
