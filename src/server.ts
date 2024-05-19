@@ -26,6 +26,7 @@ export class Server {
   listening = () => this.app.listen(this.port, () => logInfo(`🚀 Server running on port ${this.port}`))
 
   routes = () => {
+    this.app.disable('x-powered-by')
     this.app.use(cors({ origin: '*' }))
     v1Swagger(this.app, this.port)
 
