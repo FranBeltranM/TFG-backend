@@ -7,6 +7,117 @@
   },
   "openapi": "3.0.0",
   "paths": {
+    "/api/v1/brand-model": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Bastidor del vehículo",
+            "in": "query",
+            "name": "vin",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "marca_itv": {
+                          "type": "string"
+                        },
+                        "modelo_itv": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "vds": {
+                          "type": "string"
+                        },
+                        "wmi": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Marca y modelo de un vehículo"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "message": "VIN must be at least 6 characters long",
+                      "success": false
+                    },
+                    {
+                      "message": "VIN must be at most 17 characters long",
+                      "success": false
+                    }
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "value": "VIN incorrecto"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bastidor incorrecto"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Brand-model not found",
+                    "success": false
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "value": "Brand-model not found"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Marca y modelo no encontrados"
+          }
+        },
+        "summary": "Obtener marca y modelo de un vehículo desde un bastidor",
+        "tags": ["BrandModel"]
+      }
+    },
     "/api/v1/vehicle": {
       "get": {
         "parameters": [

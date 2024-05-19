@@ -8,3 +8,9 @@ export const getBrandModelFromWMIandVDS = (manageApiRepository: ManageApiReposit
     })
   }
 }
+
+export const getBrandModelFromVin = (manageApiRepository: ManageApiRepository) => {
+  return async ({ vin }: { vin: string }) => {
+    return await manageApiRepository.getBrandModelFromVin(vin)
+  }
+}

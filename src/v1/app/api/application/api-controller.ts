@@ -81,3 +81,41 @@ export const getVehicleFromVin = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const getBrandModelFromVin = async (req: Request, res: Response) => {
+  try {
+    const query = req.query as { vin: string }
+    const validation = ensureVehicleVinIsValid({ ...query })
+
+    if (typeof validation !== 'string') {
+      res.status(400).json({
+        success: false,
+        message: validation.error.message,
+      })
+      return
+    }
+
+    const [wmi, vds] = [validation.slice(0, 3), validation.slice(3, 8)]
+
+    const brandModel = await getBrandModelFromWmiAndVdsService({ wmi, vds })
+
+    if (!brandModel) {
+      res.status(404).json({
+        success: false,
+        message: 'Brand-model not found',
+      })
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      data: brandModel,
+    })
+  } catch (error: any) {
+    console.log('error', error.message)
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}

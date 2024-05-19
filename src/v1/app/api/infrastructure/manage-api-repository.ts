@@ -73,6 +73,29 @@ export class ManageApiRepository implements ApiRepository {
     return formatBrandModelResult({ brandModel: brandModel.toObject() })
   }
 
+  getBrandModelFromVin = async (vin: string): Promise<BrandModelObjectFormatted | null> => {
+    if (!this.databaseConnection) {
+      logError('Error connecting to MongoDB')
+      return null
+    }
+
+    const vehicle = await VehicleDTO.findOne({ bastidor_itv: vin }).exec() // Add '.exec()' to execute the query
+
+    if (!vehicle) {
+      return null
+    }
+
+    const { wmi, vds } = vehicle
+
+    const brandModel = await BrandModelDTO.findOne({ wmi, vds }).exec() // Add '.exec()' to execute the query
+
+    if (!brandModel) {
+      return null
+    }
+
+    return formatBrandModelResult({ brandModel: brandModel.toObject() })
+  }
+
   getVehicleTechnicalDataFromMask = async (mask: string): Promise<VehicleTechnicalDataObjectFormatted | null> => {
     if (!this.databaseConnection) {
       logError('Error connecting to MongoDB')

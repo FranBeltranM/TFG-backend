@@ -8,6 +8,7 @@ export interface ApiRepository {
 
   // BrandModel
   getBrandModelFromWmiAndVds({ wmi, vds }: { wmi: string; vds: string }): Promise<BrandModelObjectFormatted | null>
+  getBrandModelFromVin(vin: string): Promise<BrandModelObjectFormatted | null>
 
   // VehicleTechnicalData
   getVehicleTechnicalDataFromMask(mask: string): Promise<VehicleTechnicalDataObjectFormatted | null>
