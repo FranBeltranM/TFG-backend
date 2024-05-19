@@ -4,6 +4,7 @@ import { Request, Response } from '@/helpers/middle.helper'
 import { ensureVehicleVinIsValid } from '@/v1/app/api/domain/vehicle'
 
 // Application
+import { logInfo } from '@/helpers/utils'
 import {
   getBrandModelFromWmiAndVdsService,
   getVehicleFromVinService,
@@ -13,6 +14,8 @@ import {
 export const getVehicleFromVin = async (req: Request, res: Response) => {
   try {
     const query = req.query as { vin: string }
+    logInfo(`getVehicleFromVin - query: ${JSON.stringify(query)}`)
+
     const validation = ensureVehicleVinIsValid({ ...query })
 
     if (typeof validation !== 'string') {
