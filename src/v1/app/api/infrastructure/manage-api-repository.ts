@@ -15,7 +15,9 @@ import { VehicleDTO, VehicleObjectFormatted } from '@/v1/app/shared/domain/vehic
 
 // Domain API
 import { ApiRepository } from '@/v1/app/api/domain/api-repository'
+import { formatBrandModelResult } from '@/v1/app/api/domain/brand-model'
 import { formatVehicleDataResult } from '@/v1/app/api/domain/vehicle'
+import { formatVehicleTechnicalDataResult } from '@/v1/app/api/domain/vehicle-technical-data'
 
 export class ManageApiRepository implements ApiRepository {
   private databaseConnection: Connection | null = null
@@ -68,7 +70,7 @@ export class ManageApiRepository implements ApiRepository {
       return null
     }
 
-    return brandModel.toObject()
+    return formatBrandModelResult({ brandModel: brandModel.toObject() })
   }
 
   getVehicleTechnicalDataFromMask = async (mask: string): Promise<VehicleTechnicalDataObjectFormatted | null> => {
@@ -83,6 +85,6 @@ export class ManageApiRepository implements ApiRepository {
       return null
     }
 
-    return vehicleTechnicalData.toObject()
+    return formatVehicleTechnicalDataResult({ vehicleTechnicalData: vehicleTechnicalData.toObject() })
   }
 }
