@@ -50,8 +50,12 @@ export const ensureVehicleVinIsValid = ({ vin }: { vin: string | null }) => {
         required_error: 'VIN is required',
         invalid_type_error: 'VIN must be a string',
       })
-      .min(MIN_VIN_LENGTH)
-      .max(MAX_VIN_LENGTH),
+      .min(MIN_VIN_LENGTH, {
+        message: `VIN must be at least ${MIN_VIN_LENGTH} characters long`,
+      })
+      .max(MAX_VIN_LENGTH, {
+        message: `VIN must be at most ${MAX_VIN_LENGTH} characters long`,
+      }),
   })
 
   const vinValidation = vinSchema.safeParse({
