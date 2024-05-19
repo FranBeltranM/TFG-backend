@@ -7,6 +7,9 @@ import express, { Application } from 'express'
 import { routesV1 } from '@/v1/routes'
 import { logInfo } from './helpers/utils'
 
+// Swagger
+import { swaggerDocs as v1Swagger } from '@/v1/swagger'
+
 export class Server {
   private app: Application
   private port: string
@@ -24,18 +27,25 @@ export class Server {
 
   routes = () => {
     this.app.use(cors({ origin: '*' }))
+    v1Swagger(this.app, this.port)
+
     this.app.use('/api/v1', routesV1)
 
     // Default routes
     this.app.use('/api', (_, res) => res.send('🚀 API running'))
     this.app.use('/', (_, res) =>
-      res.json({
-        message: '🚀 Server running',
-        routes: {
-          base: '/api',
-          v1: '/api/v1',
-        },
-      })
+      res.send(`
+      <h1>🚀 Fran Beltrán TFG</h1>
+
+      <h2>Routes</h2>
+      <ul>
+        <li><a href="/api">/api</a></li>
+        <li><a href="/api/v1">/api/v1</a></li>
+      </ul>
+
+      <h2>Swagger</h2>
+      <p>Version 1 Docs are available on <a href="/api/v1/docs">/api/v1/docs</a></p>
+      `)
     )
   }
 

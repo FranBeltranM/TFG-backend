@@ -63,7 +63,7 @@ export const getVehicleFromVin = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       data: {
-        brandModel: {
+        brand_model: {
           marca: marca_itv,
           modelo: modelo_itv[0] ?? '',
         },

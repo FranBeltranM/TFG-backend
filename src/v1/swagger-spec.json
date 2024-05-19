@@ -1,0 +1,320 @@
+{
+  "apis": ["./src/v1/routes.ts"],
+  "info": {
+    "description": "Documentación de la API del TFG de Francisco Jesús Beltrán Moreno",
+    "title": "CheckVehicle API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/vehicle": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Bastidor del vehículo",
+            "in": "query",
+            "name": "vin",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "brand_model": {
+                          "properties": {
+                            "marca": {
+                              "type": "string"
+                            },
+                            "modelo": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "vehicle": {
+                          "properties": {
+                            "bastidor_itv": {
+                              "type": "string"
+                            },
+                            "clase_matricula": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "codigo_itv": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "codigo_tipo": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "fecha_matricula": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "fecha_primera_matriculacion": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "indicadores": {
+                              "items": {
+                                "properties": {
+                                  "baja_definitiva": {
+                                    "type": "boolean"
+                                  },
+                                  "baja_telematica": {
+                                    "type": "boolean"
+                                  },
+                                  "baja_temporal": {
+                                    "type": "boolean"
+                                  },
+                                  "embargo": {
+                                    "type": "boolean"
+                                  },
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "nuevo_usado": {
+                                    "type": "string"
+                                  },
+                                  "persona_fisica_juridica": {
+                                    "type": "string"
+                                  },
+                                  "precinto": {
+                                    "type": "boolean"
+                                  },
+                                  "renting": {
+                                    "type": "boolean"
+                                  },
+                                  "sustraccion": {
+                                    "type": "boolean"
+                                  },
+                                  "tutela": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "localidad_vehiculo": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "municipio_ine_vehiculo": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "number"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "numero_titulares": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "number"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "numero_transmisiones": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "number"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "procedencia_itv": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "provincia_matriculacion": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "provincia_vehiculo": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "servicio": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "transferencias": {
+                              "items": {
+                                "properties": {
+                                  "clave_tramite": {
+                                    "type": "string"
+                                  },
+                                  "codigo_postal": {
+                                    "type": "number"
+                                  },
+                                  "fecha_tramitacion": {
+                                    "type": "string"
+                                  },
+                                  "fecha_tramite": {
+                                    "type": "string"
+                                  },
+                                  "municipio": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "vehicle_technical_data": {
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Datos de un vehículo, su historial y su información técnica"
+          },
+          "400": {
+            "description": "Parámetros incorrectos"
+          },
+          "404": {
+            "description": "Vehículo no encontrado"
+          }
+        },
+        "summary": "Obtener información de un vehículo desde un bastidor",
+        "tags": ["Vehicle"]
+      }
+    }
+  }
+}

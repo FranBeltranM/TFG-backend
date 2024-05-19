@@ -59,7 +59,7 @@ export const ensureVehicleVinIsValid = ({ vin }: { vin: string | null }) => {
   })
 
   if (!vinValidation.success) {
-    throw new Error(vinValidation.error.errors[0].message)
+    return null
   }
 
   return vin
