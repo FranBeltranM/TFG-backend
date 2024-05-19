@@ -53,48 +53,58 @@ const Transferencia = new mongoose.Schema(
   }
 )
 
-export const VehicleSchema = new mongoose.Schema({
-  bastidor_itv: {
-    type: mongoose.Schema.Types.String,
-    index: true,
+export const VehicleSchema = new mongoose.Schema(
+  {
+    bastidor_itv: {
+      type: mongoose.Schema.Types.String,
+      index: true,
+    },
+
+    mascara_ficha_tecnica: {
+      type: mongoose.Schema.Types.String,
+      index: true,
+    },
+
+    wmi: {
+      type: mongoose.Schema.Types.String,
+      index: true,
+    },
+
+    vds: {
+      type: mongoose.Schema.Types.String,
+      index: true,
+    },
+
+    fecha_matricula: [FechaMatricula],
+    fecha_primera_matriculacion: [FechaMatricula],
+
+    codigo_provincia_matriculacion: [BaseElement],
+    codigo_clase_matricula: [BaseElement],
+    codigo_provincia_vehiculo: [BaseElement],
+    codigo_municipio_ine_vehiculo: [BaseElement],
+    codigo_procedencia_itv: [BaseElement],
+
+    localidad_vehiculo: [BaseElement],
+
+    codigo_tipo: [BaseElement],
+
+    numero_transmisiones: [BaseElement],
+    numero_titulares: [BaseElement],
+
+    codigo_itv: [BaseElement],
+
+    servicio: [BaseElement],
+
+    indicadores: [Indicadores],
+
+    transferencias: [Transferencia],
   },
-
-  mascara_ficha_tecnica: {
-    type: mongoose.Schema.Types.String,
-    index: true,
-  },
-
-  wmi: {
-    type: mongoose.Schema.Types.String,
-    index: true,
-  },
-
-  vds: {
-    type: mongoose.Schema.Types.String,
-    index: true,
-  },
-
-  fecha_matricula: [FechaMatricula],
-  fecha_primera_matriculacion: [FechaMatricula],
-
-  codigo_provincia_matriculacion: [BaseElement],
-  codigo_clase_matricula: [BaseElement],
-  codigo_provincia_vehiculo: [BaseElement],
-  codigo_municipio_ine_vehiculo: [BaseElement],
-  codigo_procedencia_itv: [BaseElement],
-
-  localidad_vehiculo: [BaseElement],
-
-  codigo_tipo: [BaseElement],
-
-  numero_transmisiones: [BaseElement],
-  numero_titulares: [BaseElement],
-
-  codigo_itv: [BaseElement],
-
-  servicio: [BaseElement],
-
-  indicadores: [Indicadores],
-
-  transferencias: [Transferencia],
-})
+  {
+    toObject: {
+      transform: (_doc, ret) => {
+        delete ret.__v
+        return
+      },
+    },
+  }
+)
