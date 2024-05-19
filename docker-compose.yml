@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  app:
+    container_name: TFG-API
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - API_PORT=${API_PORT}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - ${API_PORT}:${API_PORT}
