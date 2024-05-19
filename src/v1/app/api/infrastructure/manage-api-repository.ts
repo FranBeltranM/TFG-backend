@@ -2,6 +2,7 @@
 import { Connection } from 'mongoose'
 
 // Utils
+import { logError, logInfo } from '@/helpers/utils'
 import { connectToMongo } from '@/mongo'
 
 // Domain Shared
@@ -20,13 +21,13 @@ export class ManageApiRepository implements ApiRepository {
   private databaseConnection: Connection | null = null
 
   constructor() {
-    console.log('ManageApiRepository created')
+    logInfo('ManageApiRepository created')
     ;(async () => {
       const db = await connectToMongo()
       // Rest of the code
 
       if (!db) {
-        console.log('Error connecting to MongoDB')
+        logError('Error connecting to MongoDB')
         return
       }
 
@@ -36,7 +37,7 @@ export class ManageApiRepository implements ApiRepository {
 
   getVehicleFromVin = async (vin: string): Promise<VehicleObjectFormatted | null> => {
     if (!this.databaseConnection) {
-      console.log('Error connecting to MongoDB')
+      logError('Error connecting to MongoDB')
       return null
     }
 
@@ -57,7 +58,7 @@ export class ManageApiRepository implements ApiRepository {
     vds: string
   }): Promise<BrandModelObjectFormatted | null> => {
     if (!this.databaseConnection) {
-      console.log('Error connecting to MongoDB')
+      logError('Error connecting to MongoDB')
       return null
     }
 
@@ -72,7 +73,7 @@ export class ManageApiRepository implements ApiRepository {
 
   getVehicleTechnicalDataFromMask = async (mask: string): Promise<VehicleTechnicalDataObjectFormatted | null> => {
     if (!this.databaseConnection) {
-      console.log('Error connecting to MongoDB')
+      logError('Error connecting to MongoDB')
       return null
     }
 

@@ -5,6 +5,7 @@ import express, { Application } from 'express'
 
 // Routes
 import { routesV1 } from '@/v1/routes'
+import { logInfo } from './helpers/utils'
 
 export class Server {
   private app: Application
@@ -13,14 +14,13 @@ export class Server {
   constructor() {
     dotenv.config()
     this.app = express()
-    this.port = process.env.PORT || '3000'
+    this.port = process.env.API_PORT || '4000'
     this.listening()
-    // this.connectDB()
     this.middlewares()
     this.routes()
   }
 
-  listening = () => this.app.listen(this.port, () => console.log(`🚀 Server running on port ${this.port}`))
+  listening = () => this.app.listen(this.port, () => logInfo(`🚀 Server running on port ${this.port}`))
 
   routes = () => {
     this.app.use(cors({ origin: '*' }))
