@@ -8,7 +8,7 @@ export const VehicleTechnicalDataDTO = mongoose.model(
 )
 
 export interface VehicleTechnicalDataObject {
-  _id: string
+  _id: mongoose.Types.ObjectId
   mascara: string
 
   cilindrada_itv: number
@@ -50,6 +50,6 @@ export interface VehicleTechnicalDataObject {
   contrasena_homologacion_itv: string
 }
 
-export type VehicleTechnicalDataObjectFormatted = Omit<VehicleTechnicalDataObject, '_id'> & {
+export type VehicleTechnicalDataObjectFormatted = Omit<VehicleTechnicalDataObject, '_id' | 'mascara'> & {
   id: string
 }

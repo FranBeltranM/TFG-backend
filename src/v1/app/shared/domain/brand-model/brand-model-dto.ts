@@ -25,7 +25,7 @@ export type BrandModelBuklInsertDTO = {
 }
 
 export interface BrandModelObject {
-  _id: string
+  _id: mongoose.Types.ObjectId
   marca_itv: string
   wmi: string
   vds: string

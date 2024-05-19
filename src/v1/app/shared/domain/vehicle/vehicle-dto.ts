@@ -35,7 +35,7 @@ type Transferencia = {
 }
 
 export interface VehicleObject {
-  _id: string
+  _id: mongoose.Types.ObjectId
 
   bastidor_itv: string
   wmi: string
