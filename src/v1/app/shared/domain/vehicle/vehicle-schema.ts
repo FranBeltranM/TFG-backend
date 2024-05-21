@@ -83,6 +83,7 @@ export const VehicleSchema = new mongoose.Schema(
     codigo_provincia_vehiculo: [BaseElement],
     codigo_municipio_ine_vehiculo: [BaseElement],
     codigo_procedencia_itv: [BaseElement],
+    codigo_propulsion_itv: [BaseElement],
 
     localidad_vehiculo: [BaseElement],
 

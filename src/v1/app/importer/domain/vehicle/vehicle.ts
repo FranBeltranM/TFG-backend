@@ -49,6 +49,10 @@ const generateVehicleOne = ({ row }: { row: RowProccessed }) => {
         fecha: row.fecha_tramitacion,
         valor: row.codigo_tipo,
       },
+      codigo_propulsion_itv: {
+        fecha: row.fecha_tramitacion,
+        valor: row.codigo_propulsion_itv,
+      },
       numero_transmisiones: {
         fecha: row.fecha_tramitacion,
         valor: row.numero_transmisiones,

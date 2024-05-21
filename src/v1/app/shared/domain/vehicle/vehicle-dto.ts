@@ -50,6 +50,7 @@ export interface VehicleObject {
   codigo_provincia_vehiculo: BaseElement[]
   codigo_municipio_ine_vehiculo: BaseElement[]
   codigo_procedencia_itv: BaseElement[]
+  codigo_propulsion_itv: BaseElement[]
 
   localidad_vehiculo: BaseElement[]
 
@@ -135,6 +136,7 @@ export type VehicleBulkInsertDTO = {
         codigo_provincia_vehiculo: BaseElementDTO
         codigo_municipio_ine_vehiculo: BaseElementDTO
         codigo_procedencia_itv: BaseElementDTO
+        codigo_propulsion_itv: BaseElementDTO
         codigo_tipo: BaseElementDTO
         codigo_itv: BaseElementDTO
 
