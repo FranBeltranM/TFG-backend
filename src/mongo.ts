@@ -13,10 +13,12 @@ logInfo(`Connection string -> ${connectionString}`)
 
 export const connectToMongo = async () => {
   try {
-    await mongoose.connect(connectionString)
+    await mongoose.connect(connectionString, {
+      dbName: process.env.MONGODB_DATABASE ?? '',
+    })
     logInfo('Connected to MongoDB successfully! 🆙')
 
-    return mongoose.connection.useDb(process.env.MONGODB_DATABASE ?? 'test', { useCache: true })
+    return mongoose.connection
   } catch (error) {
     logError(`Error connecting to MongoDB: ${error}`)
     return null
