@@ -9,7 +9,7 @@ import {
   getBrandModelFromWmiAndVdsService,
   getVehicleFromVinService,
   getVehicleTechnicalDataFromMaskService,
-} from '@/v1/app/api/application/api-services'
+} from '@/v1/app/api/infrastructure/api-services'
 
 export const getVehicleFromVin = async (req: Request, res: Response) => {
   try {

@@ -16,7 +16,7 @@ import {
   importBrandModelBulkService,
   importVehicleBulkService,
   importVehicleTechnicalDataBulkService,
-} from '@/v1/app/importer/application/services'
+} from '@/v1/app/importer/infrastructure/services'
 
 const readAndImportFile = ({ fileName, disconnect = false }: { fileName: string; disconnect?: boolean }) => {
   return new Promise((resolve, reject) => {
@@ -92,11 +92,17 @@ const main = async () => {
     // '2019',
     // '2020',
     // '2021',
-    '2022',
-    '2023',
-    // '2024',
+    // '2022',
+    // '2023',
+    '2024',
   ]
-  const monthsToInsert = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+  const monthsToInsert = [
+    '01',
+    '02',
+    '03',
+    '04',
+    //'05','06', '07', '08', '09', '10', '11', '12'
+  ]
 
   // const fileNames = [
   //   '2014/export_mensual_trf_201412.txt',
