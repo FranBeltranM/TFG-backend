@@ -71,6 +71,7 @@ export interface VehicleObject {
 export type VehicleObjectFormatted = Omit<
   VehicleObject,
   | '_id'
+  | 'codigo_propulsion_itv'
   | 'codigo_provincia_matriculacion'
   | 'codigo_clase_matricula'
   | 'codigo_provincia_vehiculo'
@@ -80,6 +81,7 @@ export type VehicleObjectFormatted = Omit<
 > & {
   id: string
 
+  propulsion_itv: BaseElement[]
   provincia_matriculacion: BaseElement[]
   clase_matricula: BaseElement[]
   provincia_vehiculo: BaseElement[]

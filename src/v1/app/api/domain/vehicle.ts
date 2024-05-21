@@ -6,6 +6,7 @@ import {
   ClaveTramite,
   CodigoClaseMatricula,
   CodigoProcedenciaITV,
+  CodigoPropulsion,
   CodigoProvincia,
   CodigoTipo,
   IndicadorBajaDefinitiva,
@@ -82,6 +83,7 @@ export const formatVehicleDataResult = ({ vehicleData }: { vehicleData: VehicleO
     servicio,
     codigo_itv,
     codigo_municipio_ine_vehiculo,
+    codigo_propulsion_itv,
     codigo_provincia_matriculacion,
     codigo_provincia_vehiculo,
     codigo_tipo,
@@ -104,7 +106,14 @@ export const formatVehicleDataResult = ({ vehicleData }: { vehicleData: VehicleO
     }
   })
 
-  const codigoProvinciaMatriculacionoFormatted = codigo_provincia_matriculacion.map((el) => {
+  const codigoPropulsionFormatted = codigo_propulsion_itv.map((el) => {
+    return {
+      fecha: el.fecha,
+      valor: CodigoPropulsion[el.valor as string],
+    }
+  })
+
+  const codigoProvinciaMatriculacionFormatted = codigo_provincia_matriculacion.map((el) => {
     return {
       fecha: el.fecha,
       valor: CodigoProvincia[el.valor as string],
@@ -164,7 +173,8 @@ export const formatVehicleDataResult = ({ vehicleData }: { vehicleData: VehicleO
     procedencia_itv: codigoProcedenciaItvFormatted,
     transferencias: transferenciasFormatted,
     municipio_ine_vehiculo: codigo_municipio_ine_vehiculo,
-    provincia_matriculacion: codigoProvinciaMatriculacionoFormatted,
+    propulsion_itv: codigoPropulsionFormatted,
+    provincia_matriculacion: codigoProvinciaMatriculacionFormatted,
     provincia_vehiculo: codigoProvinciaVehiculoFormatted,
     fecha_primera_matriculacion: fecha_primera_matriculacion.length > 0 ? fecha_primera_matriculacion : null,
     codigo_tipo: codigoTipoFormatted,

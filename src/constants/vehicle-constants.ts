@@ -77,6 +77,22 @@ export const Servicio: Record<string, string> = Object.freeze({
   B21: 'Particular PART-Vehículo para ferias',
 })
 
+export const CodigoPropulsion: Record<string, string> = Object.freeze({
+  0: 'Gasolina',
+  1: 'Diesel',
+  2: 'Eléctrico',
+  3: 'Otros',
+  4: 'Butano',
+  5: 'Solar',
+  6: 'Gas Licuado de Petróleo',
+  7: 'Gas Natural Comprimido',
+  8: 'Gas Natural Licuado',
+  9: 'Hidrógeno',
+  A: 'Biometano',
+  B: 'Etanol',
+  C: 'Biodiesel',
+})
+
 export const CodigoProvincia: Record<string, string> = Object.freeze({
   A: 'Alicante/Alacant',
   AB: 'Albacete',

@@ -333,6 +333,20 @@
                               },
                               "type": "array"
                             },
+                            "propulsion_itv": {
+                              "items": {
+                                "properties": {
+                                  "fecha": {
+                                    "type": "string"
+                                  },
+                                  "valor": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
                             "provincia_matriculacion": {
                               "items": {
                                 "properties": {
