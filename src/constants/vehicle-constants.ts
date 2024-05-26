@@ -79,7 +79,7 @@ export const Servicio: Record<string, string> = Object.freeze({
 
 export const CodigoPropulsion: Record<string, string> = Object.freeze({
   0: 'Gasolina',
-  1: 'Diesel',
+  1: 'Diésel',
   2: 'Eléctrico',
   3: 'Otros',
   4: 'Butano',
