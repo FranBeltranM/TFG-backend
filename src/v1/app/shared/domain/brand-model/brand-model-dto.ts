@@ -29,7 +29,7 @@ export interface BrandModelObject {
   marca_itv: string
   wmi: string
   vds: string
-  modelo_itv: string[]
+  modelo_itv: string
 }
 
 export type BrandModelObjectFormatted = Omit<BrandModelObject, '_id'> & {
