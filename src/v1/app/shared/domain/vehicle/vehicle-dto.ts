@@ -66,6 +66,8 @@ export interface VehicleObject {
   indicadores: Indicadores[]
 
   transferencias: Transferencia[]
+
+  updated_at: Date
 }
 
 export type VehicleObjectFormatted = Omit<
@@ -89,6 +91,7 @@ export type VehicleObjectFormatted = Omit<
   procedencia_itv: BaseElement[]
 
   fecha_primera_matriculacion: FechaMatricula[] | null
+  updated_at: Date
 }
 
 // DTOs
@@ -123,6 +126,9 @@ export type VehicleBulkInsertDTO = {
       bastidor_itv: mongoose.Schema.Types.String | string
     }
     update: {
+      $set: {
+        updated_at: mongoose.Schema.Types.Date | Date
+      }
       $setOnInsert: {
         bastidor_itv: mongoose.Schema.Types.String | string
         wmi: mongoose.Schema.Types.String | string

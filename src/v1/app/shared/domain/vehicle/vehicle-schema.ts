@@ -99,6 +99,12 @@ export const VehicleSchema = new mongoose.Schema(
     indicadores: [Indicadores],
 
     transferencias: [Transferencia],
+
+    updated_at: {
+      type: mongoose.Schema.Types.Date,
+      default: Date.now,
+      index: -1,
+    },
   },
   {
     toObject: {

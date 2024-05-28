@@ -5,6 +5,7 @@ export const BrandModelDTO = mongoose.model('BrandModel', BrandModelSchema, 'Bra
 
 export type BrandModelBuklInsertDTO = {
   updateOne: {
+    $set: { updated_at: mongoose.Schema.Types.Date | Date }
     filter: {
       marca_itv: mongoose.Schema.Types.String | string
       wmi: mongoose.Schema.Types.String | string
@@ -30,6 +31,7 @@ export interface BrandModelObject {
   wmi: string
   vds: string
   modelo_itv: string
+  updated_at: Date
 }
 
 export type BrandModelObjectFormatted = Omit<BrandModelObject, '_id'> & {

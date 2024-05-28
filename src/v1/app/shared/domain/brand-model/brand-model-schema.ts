@@ -27,6 +27,12 @@ export const BrandModelSchema = new mongoose.Schema(
     modelo: mongoose.Schema.Types.String,
 
     logo: mongoose.Schema.Types.String,
+
+    updated_at: {
+      type: mongoose.Schema.Types.Date,
+      default: Date.now,
+      index: -1,
+    },
   },
   {
     toObject: {
