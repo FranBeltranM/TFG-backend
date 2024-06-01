@@ -27,7 +27,7 @@ const BaseElementIndex = new mongoose.Schema(
     fecha: mongoose.Schema.Types.Date,
     valor: {
       type: mongoose.Schema.Types.Mixed,
-      index: -1,
+      index: 1,
     },
   },
   {
