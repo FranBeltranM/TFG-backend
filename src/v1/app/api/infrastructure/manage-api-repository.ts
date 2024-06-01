@@ -110,4 +110,46 @@ export class ManageApiRepository implements ApiRepository {
 
     return formatVehicleTechnicalDataResult({ vehicleTechnicalData: vehicleTechnicalData.toObject() })
   }
+
+  getLastUpdateDate = async (): Promise<Date | null> => {
+    while (!this.databaseConnection) {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+    }
+
+    const lastUpdate = await VehicleDTO.aggregate([
+      {
+        $sort: { 'transferencias.fecha_tramitacion': -1 },
+      },
+      {
+        $limit: 1,
+      },
+      {
+        $project: {
+          _id: 1,
+          transferencias: 1,
+        },
+      },
+      {
+        $unwind: '$transferencias',
+      },
+      {
+        $group: {
+          _id: '$_id',
+          lastTransferDate: { $last: '$transferencias.fecha_tramitacion' },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          lastTransferDate: 1,
+        },
+      },
+    ])
+
+    if (!lastUpdate.length) {
+      return null
+    }
+
+    return lastUpdate[0].lastTransferDate
+  }
 }

@@ -8,6 +8,9 @@ const generateBrandModelOne = ({ row }: { row: RowProccessed }) => {
   }
 
   const brandModelUpdate = {
+    $set: {
+      updated_at: new Date(),
+    },
     $setOnInsert: {
       marca_itv: row.marca_itv,
       wmi: row.bastidor_itv.slice(0, 3),

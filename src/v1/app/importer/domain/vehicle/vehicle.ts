@@ -10,6 +10,9 @@ const generateVehicleOne = ({ row }: { row: RowProccessed }) => {
   }
 
   const vehicleUpdate = {
+    $set: {
+      updated_at: new Date(),
+    },
     $setOnInsert: {
       bastidor_itv: row.bastidor_itv,
       wmi: row.bastidor_itv.slice(0, 3),
@@ -91,6 +94,10 @@ const generateVehicleOne = ({ row }: { row: RowProccessed }) => {
         municipio: row.municipio,
         fecha_tramitacion: row.fecha_tramitacion,
         fecha_tramite: row.fecha_tramite,
+      },
+
+      $set: {
+        updated_at: new Date(),
       },
     },
   }

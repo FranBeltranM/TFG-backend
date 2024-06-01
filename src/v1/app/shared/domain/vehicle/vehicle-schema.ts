@@ -2,7 +2,10 @@ import mongoose from 'mongoose'
 
 const FechaMatricula = new mongoose.Schema(
   {
-    fecha: mongoose.Schema.Types.Date,
+    fecha: {
+      type: mongoose.Schema.Types.Date,
+      index: -1,
+    },
   },
   {
     _id: false,
@@ -13,6 +16,19 @@ const BaseElement = new mongoose.Schema(
   {
     fecha: mongoose.Schema.Types.Date,
     valor: mongoose.Schema.Types.Mixed,
+  },
+  {
+    _id: false,
+  }
+)
+
+const BaseElementIndex = new mongoose.Schema(
+  {
+    fecha: mongoose.Schema.Types.Date,
+    valor: {
+      type: mongoose.Schema.Types.Mixed,
+      index: 1,
+    },
   },
   {
     _id: false,
@@ -45,7 +61,11 @@ const Transferencia = new mongoose.Schema(
 
     municipio: mongoose.Schema.Types.String,
 
-    fecha_tramitacion: mongoose.Schema.Types.Date,
+    fecha_tramitacion: {
+      type: mongoose.Schema.Types.Date,
+      index: -1,
+    },
+
     fecha_tramite: mongoose.Schema.Types.Date,
   },
   {
@@ -78,7 +98,7 @@ export const VehicleSchema = new mongoose.Schema(
     fecha_matricula: [FechaMatricula],
     fecha_primera_matriculacion: [FechaMatricula],
 
-    codigo_provincia_matriculacion: [BaseElement],
+    codigo_provincia_matriculacion: [BaseElementIndex],
     codigo_clase_matricula: [BaseElement],
     codigo_provincia_vehiculo: [BaseElement],
     codigo_municipio_ine_vehiculo: [BaseElement],
@@ -99,6 +119,12 @@ export const VehicleSchema = new mongoose.Schema(
     indicadores: [Indicadores],
 
     transferencias: [Transferencia],
+
+    updated_at: {
+      type: mongoose.Schema.Types.Date,
+      default: Date.now,
+      index: -1,
+    },
   },
   {
     toObject: {

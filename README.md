@@ -70,3 +70,8 @@ Si tienes preguntas o sugerencias sobre el proyecto, no dudes en contactarme por
 
 - [https://pm2.keymetrics.io/docs/usage/cluster-mode/](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
 - [https://futurestud.io/tutorials/pm2-use-tsx-to-start-your-app](https://futurestud.io/tutorials/pm2-use-tsx-to-start-your-app)
+
+### Fuente Unzip files from Buffer
+
+- [https://stackoverflow.com/questions/75753565/how-to-unzip-a-buffer-to-a-directory-with-nodejs-with-minimum-dependencies](https://stackoverflow.com/questions/75753565/how-to-unzip-a-buffer-to-a-directory-with-nodejs-with-minimum-dependencies)
+- [https://github.com/cthackers/adm-zip](https://github.com/cthackers/adm-zip)

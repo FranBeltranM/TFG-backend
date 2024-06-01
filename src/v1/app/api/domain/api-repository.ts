@@ -12,4 +12,7 @@ export interface ApiRepository {
 
   // VehicleTechnicalData
   getVehicleTechnicalDataFromMask(mask: string): Promise<VehicleTechnicalDataObjectFormatted | null>
+
+  // Miscelaneous
+  getLastUpdateDate(): Promise<Date | null>
 }
