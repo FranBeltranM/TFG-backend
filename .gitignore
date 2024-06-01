@@ -4,3 +4,5 @@ build
 coverage
 src/data/*.txt
 src/data/*/*.txt
+
+package-lock.json
