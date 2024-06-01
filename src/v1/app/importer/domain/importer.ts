@@ -1,3 +1,6 @@
+// Libs
+import fs from 'fs'
+
 // TODO: AÑADIR LOS MÉTODOS NECESARIOS PARA EL IMPORTADOR DE DATOS
 
 // Documentación
@@ -497,4 +500,34 @@ export const formatRowAllFields = ({ row }: { row: string }) => {
     .reduce((acc, current) => {
       return { ...acc, ...current }
     }, {}) as RowProccessed
+}
+
+export const getFilesFromDirectory = ({ path, type = 'txt' }: { path: string; type?: string }): Promise<string[]> => {
+  return new Promise((resolve, reject) => {
+    fs.readdir(path, (err, files) => {
+      if (err) {
+        reject(err)
+      }
+
+      const filteredFiles = files.filter((file) => file.includes(type))
+      resolve(filteredFiles)
+    })
+  })
+}
+
+export const moveFile = ({ path, fileName, newPath }: { path: string; fileName: string; newPath: string }) => {
+  return new Promise((resolve, reject) => {
+    // check if directory exists
+    if (!fs.existsSync(newPath)) {
+      fs.mkdirSync(newPath)
+    }
+
+    fs.rename(`${path}${fileName}`, `${newPath}${fileName}`, (err) => {
+      if (err) {
+        reject(err)
+      }
+
+      resolve(true)
+    })
+  })
 }

@@ -1,5 +1,7 @@
 // Application
+import { downloadNewData } from '@/v1/app/importer/application/download-new-data'
 import { importBrandModelBulk } from '@/v1/app/importer/application/import-brand-model'
+import { importData } from '@/v1/app/importer/application/import-data'
 import { importVehicleBulk } from '@/v1/app/importer/application/import-vehicle'
 import { importVehicleTechnicalDataBulk } from '@/v1/app/importer/application/import-vehicle-techincal-data'
 
@@ -22,4 +24,20 @@ export const importVehicleBulkService = async (rows: RowProccessed[]) => {
 
 export const importVehicleTechnicalDataBulkService = async (rows: RowProccessed[]) => {
   return await importVehicleTechnicalDataBulk(importerRepository)(rows)
+}
+
+export const importDataService = async ({ path, fileName }: { path: string; fileName: string }) => {
+  return await importData(importerRepository)({ path, fileName })
+}
+
+export const downloadNewDataService = async ({
+  type,
+  date,
+  path,
+}: {
+  type: 'daily' | 'monthly'
+  date: Date
+  path: string
+}) => {
+  return await downloadNewData(importerRepository)({ type, date, path })
 }
