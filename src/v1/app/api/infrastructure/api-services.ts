@@ -4,7 +4,11 @@ import { ManageApiRepository } from '@/v1/app/api/infrastructure/manage-api-repo
 // Application
 import { getBrandModelFromWMIandVDS } from '@/v1/app/api/application/get/get-brand-model'
 import { getLastUpdateDate } from '@/v1/app/api/application/get/get-last-update-date'
-import { getVehicleFromVin, getVehicleFromVinResolved } from '@/v1/app/api/application/get/get-vehicle'
+import {
+  getVehicleFromVin,
+  getVehicleFromVinResolved,
+  getVehicleRegisteredInProvince,
+} from '@/v1/app/api/application/get/get-vehicle'
 import { getVehicleTechnicalDataFromMask } from '@/v1/app/api/application/get/get-vehicle-technical-data'
 
 // Application Constants
@@ -26,6 +30,18 @@ export const getVehicleFromVinService = async (vin: string) => {
 
 export const getVehicleFromVinResolvedService = async (vin: string) => {
   return await getVehicleFromVinResolved(manageApiRepository)(vin)
+}
+
+export const getVehicleRegisteredInProvinceService = async ({
+  province,
+  skip = 0,
+  limit = 10,
+}: {
+  province: string
+  skip?: number
+  limit?: number
+}) => {
+  return await getVehicleRegisteredInProvince(manageApiRepository)({ province, skip, limit })
 }
 
 export const getBrandModelFromWmiAndVdsService = async ({ wmi, vds }: { wmi: string; vds: string }) => {

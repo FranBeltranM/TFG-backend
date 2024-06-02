@@ -1,7 +1,7 @@
 import { Request, Response } from '@/helpers/middle.helper'
 
 // Domain
-import { ensureVehicleVinIsValid } from '@/v1/app/api/domain/vehicle'
+import { ensureVehicleRegisteredInProvinceIsValid, ensureVehicleVinIsValid } from '@/v1/app/api/domain/vehicle'
 
 // Application
 import { logInfo } from '@/helpers/utils'
@@ -17,6 +17,7 @@ import {
   getTypeCodeService,
   getVehicleFromVinResolvedService,
   getVehicleFromVinService,
+  getVehicleRegisteredInProvinceService,
   getVehicleTechnicalDataFromMaskService,
 } from '@/v1/app/api/infrastructure/api-services'
 
@@ -158,6 +159,50 @@ export const getVehicleFromVinResolved = async (req: Request, res: Response) => 
         },
         technical_data: vehicleTechnicalData,
       },
+    })
+  } catch (error: any) {
+    console.log('error', error.message)
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+export const getVehicleRegisteredInProvince = async (req: Request, res: Response) => {
+  try {
+    const query = req.query as { province: string; skip: string; limit: string }
+    logInfo(`getVehicleRegisteredInProvince - query: ${JSON.stringify(query)}`)
+
+    const validation = ensureVehicleRegisteredInProvinceIsValid({ ...query })
+
+    if ('error' in validation) {
+      res.status(400).json({
+        success: false,
+        message: validation.error?.message ?? validation.error,
+      })
+      return
+    }
+
+    const { province, skip, limit } = validation
+
+    const vehicles = await getVehicleRegisteredInProvinceService({
+      province,
+      skip,
+      limit,
+    })
+
+    if (!vehicles) {
+      res.status(404).json({
+        success: false,
+        message: 'Vehicles not found',
+      })
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      data: vehicles,
     })
   } catch (error: any) {
     console.log('error', error.message)

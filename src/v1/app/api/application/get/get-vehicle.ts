@@ -11,3 +11,13 @@ export const getVehicleFromVinResolved = (manageApiRepository: ManageApiReposito
     return await manageApiRepository.getVehicleFromVinResolved(vin)
   }
 }
+
+export const getVehicleRegisteredInProvince = (manageApiRepository: ManageApiRepository) => {
+  return async ({ province, skip = 0, limit = 10 }: { province: string; skip?: number; limit?: number }) => {
+    return await manageApiRepository.getVehicleRegisteredInProvince({
+      province,
+      skip,
+      limit,
+    })
+  }
+}

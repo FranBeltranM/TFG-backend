@@ -769,6 +769,150 @@
         "tags": ["Vehicle"]
       }
     },
+    "/api/v1/vehicle-registered-in-province": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Provincia de Matriculación del Vehículo",
+            "in": "query",
+            "name": "province",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Salto de página",
+            "in": "query",
+            "name": "skip",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Límite de resultados",
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "results": {
+                          "items": {
+                            "properties": {
+                              "bastidor_itv": {
+                                "type": "string"
+                              },
+                              "codigo_provincia_matriculacion": {
+                                "items": {
+                                  "properties": {
+                                    "fecha": {
+                                      "type": "string"
+                                    },
+                                    "valor": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado de vehículos"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "message": "Province is required",
+                      "success": false
+                    },
+                    {
+                      "message": "Skip is required",
+                      "success": false
+                    },
+                    {
+                      "message": "Limit is required",
+                      "success": false
+                    },
+                    {
+                      "message": "Province is not a valid province code",
+                      "success": false
+                    },
+                    {
+                      "message": "Province is required",
+                      "success": false
+                    }
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bastidor incorrecto"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Vehicles not found",
+                    "success": false
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Vehículo no encontrado"
+          }
+        },
+        "summary": "Obtener un listado de vehículos matriculados en una provincia",
+        "tags": ["Vehicle"]
+      }
+    },
     "/api/v1/vehicle-resolved": {
       "get": {
         "parameters": [

@@ -1,11 +1,25 @@
 import { BrandModelObjectFormatted } from '@/v1/app/shared/domain/brand-model/brand-model-dto'
+import { ResultsWithPagination } from '@/v1/app/shared/domain/types'
 import { VehicleTechnicalDataObjectFormatted } from '@/v1/app/shared/domain/vehicle-technical-data/vehicle-technical-data-dto'
-import { VehicleObject, VehicleObjectFormatted } from '@/v1/app/shared/domain/vehicle/vehicle-dto'
+import {
+  VehicleObject,
+  VehicleObjectFormatted,
+  VehicleRegisteredInProvince,
+} from '@/v1/app/shared/domain/vehicle/vehicle-dto'
 
 export interface ApiRepository {
   // Vehicle
   getVehicleFromVin(vin: string): Promise<VehicleObject | null>
   getVehicleFromVinResolved(vin: string): Promise<VehicleObjectFormatted | null>
+  getVehicleRegisteredInProvince({
+    province,
+    skip,
+    limit,
+  }: {
+    province: string
+    skip: number
+    limit: number
+  }): Promise<ResultsWithPagination<VehicleRegisteredInProvince> | null>
 
   // BrandModel
   getBrandModelFromWmiAndVds({ wmi, vds }: { wmi: string; vds: string }): Promise<BrandModelObjectFormatted | null>

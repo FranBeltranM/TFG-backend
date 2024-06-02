@@ -94,6 +94,8 @@ export type VehicleObjectFormatted = Omit<
   updated_at: Date
 }
 
+export type VehicleRegisteredInProvince = Pick<VehicleObjectFormatted, 'bastidor_itv' | 'provincia_matriculacion'>
+
 // DTOs
 export type FechaMatriculaDTO = {
   fecha: mongoose.Schema.Types.Date | Date

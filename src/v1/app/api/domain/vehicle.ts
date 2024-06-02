@@ -72,6 +72,90 @@ export const ensureVehicleVinIsValid = ({ vin }: { vin: string | null }) => {
   return vinValidation.data.vin
 }
 
+export const ensureVehicleRegisteredInProvinceIsValid = ({
+  province,
+  skip,
+  limit,
+}: {
+  province: string | null
+  skip: string | null
+  limit: string | null
+}) => {
+  const vehicleRegisteredInProvinceSchema = z.object({
+    province: z
+      .string({
+        required_error: 'Province is required',
+        invalid_type_error: 'Province must be a string',
+      })
+      .min(1, {
+        message: 'Province must be at least 1 characters long',
+      }),
+    skip: z
+      .string({
+        required_error: 'Skip is required',
+        invalid_type_error: 'Skip must be a string',
+      })
+      .min(1, {
+        message: 'Skip must be at least 1 character long',
+      }),
+    limit: z
+      .string({
+        required_error: 'Limit is required',
+        invalid_type_error: 'Limit must be a string',
+      })
+      .min(1, {
+        message: 'Limit must be at least 1 character long',
+      })
+      .max(2, {
+        message: 'Limit must be at most 2 characters long',
+      }),
+  })
+
+  const vehicleRegisteredInProvinceValidation = vehicleRegisteredInProvinceSchema.safeParse({
+    province,
+    skip,
+    limit,
+  })
+
+  if (!vehicleRegisteredInProvinceValidation.success) {
+    return {
+      error: vehicleRegisteredInProvinceValidation.error.errors[0],
+    }
+  }
+
+  // Check if province is a valid province code
+  if (CodigoProvincia[vehicleRegisteredInProvinceValidation.data.province] === undefined) {
+    return {
+      error: {
+        message: `${province} is not a valid province code`,
+      } as z.ZodIssue,
+    }
+  }
+
+  // Check if skip and limit are numbers
+  if (isNaN(+vehicleRegisteredInProvinceValidation.data.skip)) {
+    return {
+      error: {
+        message: 'Skip must be a number',
+      } as z.ZodIssue,
+    }
+  }
+
+  if (isNaN(+vehicleRegisteredInProvinceValidation.data.limit)) {
+    return {
+      error: {
+        message: 'Limit must be a number',
+      } as z.ZodIssue,
+    }
+  }
+
+  return {
+    province: vehicleRegisteredInProvinceValidation.data.province,
+    skip: +vehicleRegisteredInProvinceValidation.data.skip,
+    limit: +vehicleRegisteredInProvinceValidation.data.limit,
+  }
+}
+
 export const formatVehicleDataResult = ({ vehicleData }: { vehicleData: VehicleObject }): VehicleObjectFormatted => {
   const {
     _id,

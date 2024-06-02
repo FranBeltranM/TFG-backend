@@ -11,11 +11,13 @@ import {
   getTypeCode,
   getVehicleFromVin,
   getVehicleFromVinResolved,
+  getVehicleRegisteredInProvince,
 } from '@/v1/app/api/infrastructure/api-controller'
 
 export const routesVehicle = router
   .get('/vehicle', getVehicleFromVin)
   .get('/vehicle-resolved', getVehicleFromVinResolved)
+  .get('/vehicle-registered-in-province', getVehicleRegisteredInProvince)
 export const routesBrandModel = router.get('/brand-model', getBrandModelFromVin)
 
 export const routesConstants = router

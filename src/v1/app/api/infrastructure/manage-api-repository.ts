@@ -11,7 +11,12 @@ import {
   VehicleTechnicalDataDTO,
   VehicleTechnicalDataObjectFormatted,
 } from '@/v1/app/shared/domain/vehicle-technical-data/vehicle-technical-data-dto'
-import { VehicleDTO, VehicleObject, VehicleObjectFormatted } from '@/v1/app/shared/domain/vehicle/vehicle-dto'
+import {
+  VehicleDTO,
+  VehicleObject,
+  VehicleObjectFormatted,
+  VehicleRegisteredInProvince,
+} from '@/v1/app/shared/domain/vehicle/vehicle-dto'
 
 // Constants
 import {
@@ -30,6 +35,7 @@ import { ApiRepository } from '@/v1/app/api/domain/api-repository'
 import { formatBrandModelResult } from '@/v1/app/api/domain/brand-model'
 import { formatVehicleDataResult } from '@/v1/app/api/domain/vehicle'
 import { formatVehicleTechnicalDataResult } from '@/v1/app/api/domain/vehicle-technical-data'
+import { ResultsWithPagination } from '../../shared/domain/types'
 
 export class ManageApiRepository implements ApiRepository {
   private databaseConnection: Connection | null = null
@@ -77,6 +83,53 @@ export class ManageApiRepository implements ApiRepository {
     }
 
     return formatVehicleDataResult({ vehicleData: vehicle.toObject() })
+  }
+
+  getVehicleRegisteredInProvince = async ({
+    province,
+    skip,
+    limit,
+  }: {
+    province: string
+    skip: number
+    limit: number
+  }): Promise<ResultsWithPagination<VehicleRegisteredInProvince> | null> => {
+    if (!this.databaseConnection) {
+      logError('Error connecting to MongoDB')
+      return null
+    }
+
+    const totalVehicles = await VehicleDTO.countDocuments({ 'codigo_provincia_matriculacion.valor': province }).exec() // Add '.exec()' to execute the query
+
+    const vehicles = await VehicleDTO.aggregate([
+      {
+        $match: { 'codigo_provincia_matriculacion.valor': province },
+      },
+      {
+        $skip: skip,
+      },
+      {
+        $limit: limit,
+      },
+      {
+        $project: {
+          _id: 0,
+          bastidor_itv: 1,
+          codigo_provincia_matriculacion: 1,
+        },
+      },
+    ])
+
+    if (!vehicles.length || !totalVehicles) {
+      return null
+    }
+
+    return {
+      results: vehicles.map((vehicle) => vehicle) as VehicleRegisteredInProvince[],
+      total: totalVehicles,
+      page: Math.ceil(skip / limit) + 1,
+      totalPages: Math.ceil(totalVehicles / limit),
+    }
   }
 
   getBrandModelFromWmiAndVds = async ({
