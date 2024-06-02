@@ -1,6 +1,7 @@
 import { router } from '@/helpers/middle.helper'
 import {
   getBrandModelFromVin,
+  getBrandsList,
   getDefinitiveDeregistrationIndicator,
   getOriginCodeVehicleInspection,
   getPlateClassCode,
@@ -18,7 +19,8 @@ export const routesVehicle = router
   .get('/vehicle', getVehicleFromVin)
   .get('/vehicle-resolved', getVehicleFromVinResolved)
   .get('/vehicle-registered-in-province', getVehicleRegisteredInProvince)
-export const routesBrandModel = router.get('/brand-model', getBrandModelFromVin)
+
+export const routesBrandModel = router.get('/brand-model', getBrandModelFromVin).get('/brands-list', getBrandsList)
 
 export const routesConstants = router
   .get('/constants/get-plate-class-code', getPlateClassCode)

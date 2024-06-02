@@ -7,6 +7,7 @@ import { ensureVehicleRegisteredInProvinceIsValid, ensureVehicleVinIsValid } fro
 import { logInfo } from '@/helpers/utils'
 import {
   getBrandModelFromWmiAndVdsService,
+  getBrandsListService,
   getDefinitiveDeregistrationIndicatorService,
   getOriginCodeVehicleInspectionService,
   getPlateClassCodeService,
@@ -21,6 +22,7 @@ import {
   getVehicleTechnicalDataFromMaskService,
 } from '@/v1/app/api/infrastructure/api-services'
 
+// Vehicle
 export const getVehicleFromVin = async (req: Request, res: Response) => {
   try {
     const query = req.query as { vin: string }
@@ -213,6 +215,7 @@ export const getVehicleRegisteredInProvince = async (req: Request, res: Response
   }
 }
 
+// BrandModels
 export const getBrandModelFromVin = async (req: Request, res: Response) => {
   try {
     const query = req.query as { vin: string }
@@ -241,6 +244,31 @@ export const getBrandModelFromVin = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       data: brandModel,
+    })
+  } catch (error: any) {
+    console.log('error', error.message)
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+export const getBrandsList = async (_req: Request, res: Response) => {
+  try {
+    const brands = await getBrandsListService()
+
+    if (!brands) {
+      res.status(404).json({
+        success: false,
+        message: 'Brands not found',
+      })
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      data: brands,
     })
   } catch (error: any) {
     console.log('error', error.message)

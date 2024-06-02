@@ -1,4 +1,4 @@
-import { BrandModelObjectFormatted } from '@/v1/app/shared/domain/brand-model/brand-model-dto'
+import { BrandModelObjectFormatted, Brands } from '@/v1/app/shared/domain/brand-model/brand-model-dto'
 import { ResultsWithPagination } from '@/v1/app/shared/domain/types'
 import { VehicleTechnicalDataObjectFormatted } from '@/v1/app/shared/domain/vehicle-technical-data/vehicle-technical-data-dto'
 import {
@@ -24,6 +24,7 @@ export interface ApiRepository {
   // BrandModel
   getBrandModelFromWmiAndVds({ wmi, vds }: { wmi: string; vds: string }): Promise<BrandModelObjectFormatted | null>
   getBrandModelFromVin(vin: string): Promise<BrandModelObjectFormatted | null>
+  getBrandsList(): Promise<Brands | null>
 
   // VehicleTechnicalData
   getVehicleTechnicalDataFromMask(mask: string): Promise<VehicleTechnicalDataObjectFormatted | null>

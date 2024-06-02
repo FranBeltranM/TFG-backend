@@ -114,6 +114,37 @@
         "tags": ["BrandModel"]
       }
     },
+    "/api/v1/brands-list": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado de todas las marcas registradas"
+          }
+        },
+        "summary": "Obtener todas las marcas registradas en la Base de Datos",
+        "tags": ["BrandModel"]
+      }
+    },
     "/api/v1/constants/get-definitive-deregistration-indicator": {
       "get": {
         "responses": {

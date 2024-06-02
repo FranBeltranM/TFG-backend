@@ -14,3 +14,9 @@ export const getBrandModelFromVin = (manageApiRepository: ManageApiRepository) =
     return await manageApiRepository.getBrandModelFromVin(vin)
   }
 }
+
+export const getBrandsList = (manageApiRepository: ManageApiRepository) => {
+  return async () => {
+    return await manageApiRepository.getBrandsList()
+  }
+}

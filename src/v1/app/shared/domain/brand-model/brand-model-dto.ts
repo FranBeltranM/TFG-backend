@@ -37,3 +37,5 @@ export interface BrandModelObject {
 export type BrandModelObjectFormatted = Omit<BrandModelObject, '_id'> & {
   id: string
 }
+
+export type Brands = string[]

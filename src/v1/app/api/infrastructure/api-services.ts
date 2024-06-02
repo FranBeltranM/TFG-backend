@@ -2,7 +2,7 @@
 import { ManageApiRepository } from '@/v1/app/api/infrastructure/manage-api-repository'
 
 // Application
-import { getBrandModelFromWMIandVDS } from '@/v1/app/api/application/get/get-brand-model'
+import { getBrandModelFromWMIandVDS, getBrandsList } from '@/v1/app/api/application/get/get-brand-model'
 import { getLastUpdateDate } from '@/v1/app/api/application/get/get-last-update-date'
 import {
   getVehicleFromVin,
@@ -24,6 +24,7 @@ import { getTypeCode } from '@/v1/app/api/application/get/get-type-code'
 // Repository
 const manageApiRepository = new ManageApiRepository()
 
+// Vehicle
 export const getVehicleFromVinService = async (vin: string) => {
   return await getVehicleFromVin(manageApiRepository)(vin)
 }
@@ -44,14 +45,21 @@ export const getVehicleRegisteredInProvinceService = async ({
   return await getVehicleRegisteredInProvince(manageApiRepository)({ province, skip, limit })
 }
 
+// BrandModels
 export const getBrandModelFromWmiAndVdsService = async ({ wmi, vds }: { wmi: string; vds: string }) => {
   return await getBrandModelFromWMIandVDS(manageApiRepository)({ wmi, vds })
 }
 
+export const getBrandsListService = async () => {
+  return await getBrandsList(manageApiRepository)()
+}
+
+// VehicleTechnicalData
 export const getVehicleTechnicalDataFromMaskService = async (mask: string) => {
   return await getVehicleTechnicalDataFromMask(manageApiRepository)(mask)
 }
 
+// Miscelaneous
 export const getLastUpdateDateService = async () => {
   return await getLastUpdateDate(manageApiRepository)()
 }

@@ -6,7 +6,7 @@ import { logError, logInfo } from '@/helpers/utils'
 import { connectToMongo } from '@/mongo'
 
 // Domain Shared
-import { BrandModelDTO, BrandModelObjectFormatted } from '@/v1/app/shared/domain/brand-model/brand-model-dto'
+import { BrandModelDTO, BrandModelObjectFormatted, Brands } from '@/v1/app/shared/domain/brand-model/brand-model-dto'
 import {
   VehicleTechnicalDataDTO,
   VehicleTechnicalDataObjectFormatted,
@@ -55,6 +55,7 @@ export class ManageApiRepository implements ApiRepository {
     })()
   }
 
+  // Vehicle
   getVehicleFromVin = async (vin: string): Promise<VehicleObject | null> => {
     if (!this.databaseConnection) {
       logError('Error connecting to MongoDB')
@@ -132,6 +133,7 @@ export class ManageApiRepository implements ApiRepository {
     }
   }
 
+  // BrandModel
   getBrandModelFromWmiAndVds = async ({
     wmi,
     vds,
@@ -176,6 +178,43 @@ export class ManageApiRepository implements ApiRepository {
     return formatBrandModelResult({ brandModel: brandModel.toObject() })
   }
 
+  getBrandsList = async (): Promise<Brands | null> => {
+    if (!this.databaseConnection) {
+      logError('Error connecting to MongoDB')
+      return null
+    }
+
+    const totalBrandModels = BrandModelDTO.estimatedDocumentCount().exec() // Add '.exec()' to execute the query
+
+    const brands = await BrandModelDTO.aggregate([
+      {
+        $group: {
+          _id: 'marca_itv',
+          label: { $addToSet: '$marca_itv' },
+        },
+      },
+      {
+        $unwind: '$label',
+      },
+      {
+        $project: {
+          _id: 0,
+          label: 1,
+        },
+      },
+      {
+        $sort: { label: 1 },
+      },
+    ])
+
+    if (!brands.length || !totalBrandModels) {
+      return null
+    }
+
+    return brands
+  }
+
+  // VehicleTechnicalData
   getVehicleTechnicalDataFromMask = async (mask: string): Promise<VehicleTechnicalDataObjectFormatted | null> => {
     if (!this.databaseConnection) {
       logError('Error connecting to MongoDB')
