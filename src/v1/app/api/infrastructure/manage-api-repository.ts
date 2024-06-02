@@ -157,7 +157,7 @@ export class ManageApiRepository implements ApiRepository {
   }
 
   getService = (): Array<Record<string, string>> | null => {
-    const service = Object.entries(Servicio).map(([key, value]) => ({ [key]: value }))
+    const service = Object.entries(Servicio).map(([key, value]) => ({ key, value }))
     return service
   }
 }

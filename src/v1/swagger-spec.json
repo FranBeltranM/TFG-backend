@@ -125,7 +125,10 @@
                     "data": {
                       "items": {
                         "properties": {
-                          "id": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "value": {
                             "type": "string"
                           }
                         }
@@ -143,7 +146,7 @@
             "description": "Listado con los valores"
           }
         },
-        "summary": "Devuelve un listado con los posibles valores del campo codigo_servicio",
+        "summary": "Devuelve un listado con los posibles valores del campo servicio",
         "tags": ["Constants"]
       }
     },
