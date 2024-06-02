@@ -11,7 +11,7 @@ import {
   VehicleTechnicalDataDTO,
   VehicleTechnicalDataObjectFormatted,
 } from '@/v1/app/shared/domain/vehicle-technical-data/vehicle-technical-data-dto'
-import { VehicleDTO, VehicleObjectFormatted } from '@/v1/app/shared/domain/vehicle/vehicle-dto'
+import { VehicleDTO, VehicleObject, VehicleObjectFormatted } from '@/v1/app/shared/domain/vehicle/vehicle-dto'
 
 // Constants
 import {
@@ -49,7 +49,22 @@ export class ManageApiRepository implements ApiRepository {
     })()
   }
 
-  getVehicleFromVin = async (vin: string): Promise<VehicleObjectFormatted | null> => {
+  getVehicleFromVin = async (vin: string): Promise<VehicleObject | null> => {
+    if (!this.databaseConnection) {
+      logError('Error connecting to MongoDB')
+      return null
+    }
+
+    const vehicle = await VehicleDTO.findOne({ bastidor_itv: vin }).exec() // Add '.exec()' to execute the query
+
+    if (!vehicle) {
+      return null
+    }
+
+    return vehicle.toObject()
+  }
+
+  getVehicleFromVinResolved = async (vin: string): Promise<VehicleObjectFormatted | null> => {
     if (!this.databaseConnection) {
       logError('Error connecting to MongoDB')
       return null

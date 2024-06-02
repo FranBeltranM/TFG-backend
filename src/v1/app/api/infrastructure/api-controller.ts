@@ -15,6 +15,7 @@ import {
   getProvinceCodeService,
   getServiceService,
   getTypeCodeService,
+  getVehicleFromVinResolvedService,
   getVehicleFromVinService,
   getVehicleTechnicalDataFromMaskService,
 } from '@/v1/app/api/infrastructure/api-services'
@@ -35,6 +36,80 @@ export const getVehicleFromVin = async (req: Request, res: Response) => {
     }
 
     const vehicle = await getVehicleFromVinService(validation)
+
+    if (!vehicle) {
+      res.status(404).json({
+        success: false,
+        message: 'Vehicle not found',
+      })
+      return
+    }
+
+    const { mascara_ficha_tecnica, wmi, vds, ...restDataVehicle } = vehicle
+
+    const brandModel = await getBrandModelFromWmiAndVdsService({
+      wmi: vehicle.wmi,
+      vds: vehicle.vds,
+    })
+
+    if (!brandModel) {
+      res.status(404).json({
+        success: false,
+        message: 'BrandModel not found',
+      })
+      return
+    }
+
+    const { marca_itv, modelo_itv } = brandModel
+
+    const vehicleTechnicalData = await getVehicleTechnicalDataFromMaskService(mascara_ficha_tecnica)
+
+    if (!vehicleTechnicalData) {
+      res.status(404).json({
+        success: false,
+        message: 'VehicleTechnicalData not found',
+      })
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        brand_model: {
+          marca: marca_itv,
+          modelo: modelo_itv ?? '',
+        },
+        vehicle: {
+          ...restDataVehicle,
+        },
+        technical_data: vehicleTechnicalData,
+      },
+    })
+  } catch (error: any) {
+    console.log('error', error.message)
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+export const getVehicleFromVinResolved = async (req: Request, res: Response) => {
+  try {
+    const query = req.query as { vin: string }
+    logInfo(`getVehicleFromVin - query: ${JSON.stringify(query)}`)
+
+    const validation = ensureVehicleVinIsValid({ ...query })
+
+    if (typeof validation !== 'string') {
+      res.status(400).json({
+        success: false,
+        message: validation.error.message,
+      })
+      return
+    }
+
+    const vehicle = await getVehicleFromVinResolvedService(validation)
 
     if (!vehicle) {
       res.status(404).json({

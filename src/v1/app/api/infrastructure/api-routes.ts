@@ -10,9 +10,12 @@ import {
   getService,
   getTypeCode,
   getVehicleFromVin,
+  getVehicleFromVinResolved,
 } from '@/v1/app/api/infrastructure/api-controller'
 
-export const routesVehicle = router.get('/vehicle', getVehicleFromVin)
+export const routesVehicle = router
+  .get('/vehicle', getVehicleFromVin)
+  .get('/vehicle-resolved', getVehicleFromVinResolved)
 export const routesBrandModel = router.get('/brand-model', getBrandModelFromVin)
 
 export const routesConstants = router
