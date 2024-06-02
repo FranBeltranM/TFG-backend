@@ -118,7 +118,7 @@ export class ManageApiRepository implements ApiRepository {
 
     const lastUpdate = await VehicleDTO.aggregate([
       {
-        $sort: { 'transferencias.fecha_tramitacion': -1 },
+        $sort: { 'transferencias.fecha_tramite': -1 },
       },
       {
         $limit: 1,
@@ -135,7 +135,7 @@ export class ManageApiRepository implements ApiRepository {
       {
         $group: {
           _id: '$_id',
-          lastTransferDate: { $last: '$transferencias.fecha_tramitacion' },
+          lastTransferDate: { $last: '$transferencias.fecha_tramite' },
         },
       },
       {
