@@ -14,7 +14,16 @@ import {
 import { VehicleDTO, VehicleObjectFormatted } from '@/v1/app/shared/domain/vehicle/vehicle-dto'
 
 // Constants
-import { Servicio } from '@/constants/vehicle-constants'
+import {
+  ClaveTramite,
+  CodigoClaseMatricula,
+  CodigoProcedenciaITV,
+  CodigoPropulsion,
+  CodigoProvincia,
+  CodigoTipo,
+  IndicadorBajaDefinitiva,
+  Servicio,
+} from '@/constants/vehicle-constants'
 
 // Domain API
 import { ApiRepository } from '@/v1/app/api/domain/api-repository'
@@ -156,8 +165,47 @@ export class ManageApiRepository implements ApiRepository {
     return lastUpdate[0].lastTransferDate
   }
 
+  // Constants
+  getPlateClassCode = (): Array<Record<string, string>> | null => {
+    const plateClass = Object.entries(CodigoClaseMatricula).map(([key, value]) => ({ label: value, value: key }))
+    return plateClass
+  }
+
+  getOriginCodeVehicleInspection = (): Array<Record<string, string>> | null => {
+    const originCode = Object.entries(CodigoProcedenciaITV).map(([key, value]) => ({ label: value, value: key }))
+    return originCode
+  }
+
+  getProcessKey(): Record<string, string>[] | null {
+    const processKey = Object.entries(ClaveTramite).map(([key, value]) => ({ label: value, value: key }))
+    return processKey
+  }
+
+  getDefinitiveDeregistrationIndicator = (): Array<Record<string, string>> | null => {
+    const definitiveDeregistration = Object.entries(IndicadorBajaDefinitiva).map(([key, value]) => ({
+      value: key,
+      label: value,
+    }))
+    return definitiveDeregistration
+  }
+
   getService = (): Array<Record<string, string>> | null => {
-    const service = Object.entries(Servicio).map(([key, value]) => ({ key, value }))
+    const service = Object.entries(Servicio).map(([key, value]) => ({ label: value, value: key }))
     return service
+  }
+
+  getPropulsionCode(): Record<string, string>[] | null {
+    const propulsionCode = Object.entries(CodigoPropulsion).map(([key, value]) => ({ label: value, value: key }))
+    return propulsionCode
+  }
+
+  getProvinceCode(): Record<string, string>[] | null {
+    const provinceCode = Object.entries(CodigoProvincia).map(([key, value]) => ({ label: value, value: key }))
+    return provinceCode
+  }
+
+  getTypeCode(): Record<string, string>[] | null {
+    const typeCode = Object.entries(CodigoTipo).map(([key, value]) => ({ label: value, value: key }))
+    return typeCode
   }
 }

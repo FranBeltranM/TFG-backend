@@ -114,6 +114,222 @@
         "tags": ["BrandModel"]
       }
     },
+    "/api/v1/constants/get-definitive-deregistration-indicator": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "array"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado con los valores"
+          }
+        },
+        "summary": "Devuelve un listado con los posibles valores del campo baja_definitiva que se encuentra dentro del listado de objetos llamado Indicadores",
+        "tags": ["Constants"]
+      }
+    },
+    "/api/v1/constants/get-origin-code-vehicle-inspection": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "array"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado con los valores"
+          }
+        },
+        "summary": "Devuelve un listado con los posibles valores del campo codigo_procedencia_itv",
+        "tags": ["Constants"]
+      }
+    },
+    "/api/v1/constants/get-plate-class-code": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "array"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado con los valores"
+          }
+        },
+        "summary": "Devuelve un listado con los posibles valores para el campo codigo_clase_matricula",
+        "tags": ["Constants"]
+      }
+    },
+    "/api/v1/constants/get-process-key": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "array"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado con los valores"
+          }
+        },
+        "summary": "Devuelve un listado con los posibles valores del campo clave_tramite que se encuentra dentro del listado de objetos llamado Transferencias",
+        "tags": ["Constants"]
+      }
+    },
+    "/api/v1/constants/get-propulsion-code": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "array"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado con los valores"
+          }
+        },
+        "summary": "Devuelve un listado con los posibles valores del campo codigo_propulsion_itv",
+        "tags": ["Constants"]
+      }
+    },
+    "/api/v1/constants/get-province-code": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "array"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado con los valores"
+          }
+        },
+        "summary": "Devuelve un listado con los posibles valores de los campos codigo_provincia_matriculacion y codigo_provincia_vehiculo",
+        "tags": ["Constants"]
+      }
+    },
     "/api/v1/constants/get-service": {
       "get": {
         "responses": {
@@ -125,7 +341,7 @@
                     "data": {
                       "items": {
                         "properties": {
-                          "key": {
+                          "label": {
                             "type": "string"
                           },
                           "value": {
@@ -147,6 +363,42 @@
           }
         },
         "summary": "Devuelve un listado con los posibles valores del campo servicio",
+        "tags": ["Constants"]
+      }
+    },
+    "/api/v1/constants/get-type-code": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "array"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado con los valores"
+          }
+        },
+        "summary": "Devuelve un listado con los posibles valores del campo codigo_tipo",
         "tags": ["Constants"]
       }
     },

@@ -17,5 +17,12 @@ export interface ApiRepository {
   getLastUpdateDate(): Promise<Date | null>
 
   // Constants
+  getPlateClassCode(): Array<Record<string, string>> | null
+  getOriginCodeVehicleInspection(): Array<Record<string, string>> | null
+  getProcessKey(): Array<Record<string, string>> | null
+  getDefinitiveDeregistrationIndicator(): Array<Record<string, string>> | null
   getService(): Array<Record<string, string>> | null
+  getPropulsionCode(): Array<Record<string, string>> | null
+  getProvinceCode(): Array<Record<string, string>> | null
+  getTypeCode(): Array<Record<string, string>> | null
 }
