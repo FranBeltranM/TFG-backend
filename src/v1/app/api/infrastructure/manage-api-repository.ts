@@ -13,6 +13,9 @@ import {
 } from '@/v1/app/shared/domain/vehicle-technical-data/vehicle-technical-data-dto'
 import { VehicleDTO, VehicleObjectFormatted } from '@/v1/app/shared/domain/vehicle/vehicle-dto'
 
+// Constants
+import { Servicio } from '@/constants/vehicle-constants'
+
 // Domain API
 import { ApiRepository } from '@/v1/app/api/domain/api-repository'
 import { formatBrandModelResult } from '@/v1/app/api/domain/brand-model'
@@ -151,5 +154,10 @@ export class ManageApiRepository implements ApiRepository {
     }
 
     return lastUpdate[0].lastTransferDate
+  }
+
+  getService = (): Array<Record<string, string>> | null => {
+    const service = Object.entries(Servicio).map(([key, value]) => ({ [key]: value }))
+    return service
   }
 }

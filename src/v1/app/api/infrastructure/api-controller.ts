@@ -7,6 +7,7 @@ import { ensureVehicleVinIsValid } from '@/v1/app/api/domain/vehicle'
 import { logInfo } from '@/helpers/utils'
 import {
   getBrandModelFromWmiAndVdsService,
+  getServiceService,
   getVehicleFromVinService,
   getVehicleTechnicalDataFromMaskService,
 } from '@/v1/app/api/infrastructure/api-services'
@@ -113,6 +114,31 @@ export const getBrandModelFromVin = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       data: brandModel,
+    })
+  } catch (error: any) {
+    console.log('error', error.message)
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+export const getService = async (_req: Request, res: Response) => {
+  try {
+    const service = getServiceService()
+
+    if (!service) {
+      res.status(404).json({
+        success: false,
+        message: 'Service data not found',
+      })
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      data: service,
     })
   } catch (error: any) {
     console.log('error', error.message)

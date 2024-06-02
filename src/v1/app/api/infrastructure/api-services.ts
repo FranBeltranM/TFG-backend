@@ -7,6 +7,9 @@ import { getLastUpdateDate } from '@/v1/app/api/application/get/get-last-update-
 import { getVehicleFromVin } from '@/v1/app/api/application/get/get-vehicle'
 import { getVehicleTechnicalDataFromMask } from '@/v1/app/api/application/get/get-vehicle-technical-data'
 
+// Application Constants
+import { getService } from '@/v1/app/api/application/get/get-service'
+
 // Repository
 const manageApiRepository = new ManageApiRepository()
 
@@ -24,4 +27,8 @@ export const getVehicleTechnicalDataFromMaskService = async (mask: string) => {
 
 export const getLastUpdateDateService = async () => {
   return await getLastUpdateDate(manageApiRepository)()
+}
+
+export const getServiceService = () => {
+  return getService(manageApiRepository)()
 }

@@ -15,4 +15,7 @@ export interface ApiRepository {
 
   // Miscelaneous
   getLastUpdateDate(): Promise<Date | null>
+
+  // Constants
+  getService(): Array<Record<string, string>> | null
 }

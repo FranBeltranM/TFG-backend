@@ -75,12 +75,10 @@
                   ],
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "value": "VIN incorrecto"
+                      "type": "string"
                     },
                     "success": {
-                      "type": "boolean",
-                      "value": false
+                      "type": "boolean"
                     }
                   },
                   "type": "object"
@@ -99,12 +97,10 @@
                   },
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "value": "Brand-model not found"
+                      "type": "string"
                     },
                     "success": {
-                      "type": "boolean",
-                      "value": false
+                      "type": "boolean"
                     }
                   },
                   "type": "object"
@@ -116,6 +112,39 @@
         },
         "summary": "Obtener marca y modelo de un vehículo desde un bastidor",
         "tags": ["BrandModel"]
+      }
+    },
+    "/api/v1/constants/get-service": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "array"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado con los valores"
+          }
+        },
+        "summary": "Devuelve un listado con los posibles valores del campo codigo_servicio",
+        "tags": ["Constants"]
       }
     },
     "/api/v1/vehicle": {
@@ -446,12 +475,10 @@
                   ],
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "value": "VIN incorrecto"
+                      "type": "string"
                     },
                     "success": {
-                      "type": "boolean",
-                      "value": false
+                      "type": "boolean"
                     }
                   },
                   "type": "object"
@@ -470,12 +497,10 @@
                   },
                   "properties": {
                     "message": {
-                      "type": "string",
-                      "value": "Vehicle not found"
+                      "type": "string"
                     },
                     "success": {
-                      "type": "boolean",
-                      "value": false
+                      "type": "boolean"
                     }
                   },
                   "type": "object"
