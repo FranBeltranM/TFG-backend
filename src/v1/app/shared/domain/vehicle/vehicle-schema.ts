@@ -61,12 +61,9 @@ const Transferencia = new mongoose.Schema(
 
     municipio: mongoose.Schema.Types.String,
 
-    fecha_tramitacion: {
-      type: mongoose.Schema.Types.Date,
-      index: -1,
-    },
+    fecha_tramitacion: mongoose.Schema.Types.Date,
 
-    fecha_tramite: mongoose.Schema.Types.Date,
+    fecha_tramite: { type: mongoose.Schema.Types.Date, index: -1 },
   },
   {
     _id: false,
