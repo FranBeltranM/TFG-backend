@@ -1310,6 +1310,94 @@
         "summary": "Obtener información de un vehículo desde un bastidor con las constantes resueltas (Recomendado para mostrar en WEB)",
         "tags": ["Vehicle"]
       }
+    },
+    "/api/v1/vehicles-registered-between-dates": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Fecha de Inicio",
+            "in": "query",
+            "name": "startDate",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Fecha de Fin",
+            "in": "query",
+            "name": "endDate",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Salto de página",
+            "in": "query",
+            "name": "skip",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Límite de resultados",
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "results": {
+                          "items": {
+                            "properties": {
+                              "bastidor_itv": {
+                                "type": "string"
+                              },
+                              "fecha_matricula": {
+                                "items": {
+                                  "properties": {
+                                    "fecha": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado de Vehículos"
+          }
+        },
+        "summary": "Obtener un listado de vehiculos matriculados entre dos fechas",
+        "tags": ["Vehicle"]
+      }
     }
   }
 }

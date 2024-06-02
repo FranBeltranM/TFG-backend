@@ -20,6 +20,7 @@ import {
   getVehicleFromVinService,
   getVehicleRegisteredInProvinceService,
   getVehicleTechnicalDataFromMaskService,
+  getVehiclesRegisteredBetweenDatesService,
 } from '@/v1/app/api/infrastructure/api-services'
 
 // Vehicle
@@ -192,6 +193,41 @@ export const getVehicleRegisteredInProvince = async (req: Request, res: Response
       province,
       skip,
       limit,
+    })
+
+    if (!vehicles) {
+      res.status(404).json({
+        success: false,
+        message: 'Vehicles not found',
+      })
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      data: vehicles,
+    })
+  } catch (error: any) {
+    console.log('error', error.message)
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+export const getVehiclesRegisteredBetweenDates = async (req: Request, res: Response) => {
+  try {
+    const query = req.query as { startDate: string; endDate: string; skip: string; limit: string }
+    logInfo(`getVehiclesRegisteredBetweenDates - query: ${JSON.stringify(query)}`)
+
+    const { startDate, endDate, skip, limit } = query
+
+    const vehicles = await getVehiclesRegisteredBetweenDatesService({
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
+      skip: parseInt(skip),
+      limit: parseInt(limit),
     })
 
     if (!vehicles) {

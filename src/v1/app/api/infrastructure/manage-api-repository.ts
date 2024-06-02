@@ -133,6 +133,51 @@ export class ManageApiRepository implements ApiRepository {
     }
   }
 
+  getVehicleRegisteredBetweenDates = async ({
+    startDate,
+    endDate,
+    skip,
+    limit,
+  }: {
+    startDate: Date
+    endDate: Date
+    skip: number
+    limit: number
+  }): Promise<ResultsWithPagination<VehicleObjectFormatted> | null> => {
+    if (!this.databaseConnection) {
+      logError('Error connecting to MongoDB')
+      return null
+    }
+
+    const vehicles = await VehicleDTO.aggregate([
+      {
+        $match: { 'fecha_matricula.fecha': { $gte: startDate, $lte: endDate } },
+      },
+      {
+        $skip: skip,
+      },
+      {
+        $limit: limit,
+      },
+      {
+        $project: {
+          _id: 0,
+          bastidor_itv: 1,
+          fecha_matricula: 1,
+        },
+      },
+    ])
+
+    if (!vehicles.length) {
+      return null
+    }
+
+    return {
+      results: vehicles.map((vehicle) => vehicle) as VehicleObjectFormatted[],
+      page: Math.ceil(skip / limit) + 1,
+    }
+  }
+
   // BrandModel
   getBrandModelFromWmiAndVds = async ({
     wmi,

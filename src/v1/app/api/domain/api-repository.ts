@@ -21,6 +21,19 @@ export interface ApiRepository {
     limit: number
   }): Promise<ResultsWithPagination<VehicleRegisteredInProvince> | null>
 
+  // Vehicle and BrandModel
+  getVehicleRegisteredBetweenDates({
+    startDate,
+    endDate,
+    skip,
+    limit,
+  }: {
+    startDate: Date
+    endDate: Date
+    skip: number
+    limit: number
+  }): Promise<ResultsWithPagination<VehicleObjectFormatted> | null>
+
   // BrandModel
   getBrandModelFromWmiAndVds({ wmi, vds }: { wmi: string; vds: string }): Promise<BrandModelObjectFormatted | null>
   getBrandModelFromVin(vin: string): Promise<BrandModelObjectFormatted | null>

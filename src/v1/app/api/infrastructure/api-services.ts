@@ -20,6 +20,7 @@ import { getPropulsionCode } from '@/v1/app/api/application/get/get-propulsion-c
 import { getProvinceCode } from '@/v1/app/api/application/get/get-province-code'
 import { getService } from '@/v1/app/api/application/get/get-service'
 import { getTypeCode } from '@/v1/app/api/application/get/get-type-code'
+import { getVehiclesRegisteredBetweenDates } from '@/v1/app/api/application/get/get-vehicles-registered-between-dates'
 
 // Repository
 const manageApiRepository = new ManageApiRepository()
@@ -43,6 +44,20 @@ export const getVehicleRegisteredInProvinceService = async ({
   limit?: number
 }) => {
   return await getVehicleRegisteredInProvince(manageApiRepository)({ province, skip, limit })
+}
+
+export const getVehiclesRegisteredBetweenDatesService = async ({
+  startDate,
+  endDate,
+  skip = 0,
+  limit = 10,
+}: {
+  startDate: Date
+  endDate: Date
+  skip?: number
+  limit?: number
+}) => {
+  return await getVehiclesRegisteredBetweenDates(manageApiRepository)({ startDate, endDate, skip, limit })
 }
 
 // BrandModels
