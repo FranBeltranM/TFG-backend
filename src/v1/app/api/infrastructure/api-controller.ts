@@ -2,7 +2,8 @@ import { Request, Response } from '@/helpers/middle.helper'
 
 // Domain
 import {
-  ensuerVehicleRegisteredBetweenDatesIsValid,
+  ensureSkipAndLimitAreValid,
+  ensureVehicleRegisteredBetweenDatesIsValid,
   ensureVehicleRegisteredInProvinceIsValid,
   ensureVehicleVinIsValid,
 } from '@/v1/app/api/domain/vehicle'
@@ -25,6 +26,7 @@ import {
   getVehicleRegisteredInProvinceService,
   getVehicleTechnicalDataFromMaskService,
   getVehiclesRegisteredBetweenDatesService,
+  getVehiclesStolenService,
 } from '@/v1/app/api/infrastructure/api-services'
 
 // Vehicle
@@ -225,7 +227,7 @@ export const getVehiclesRegisteredBetweenDates = async (req: Request, res: Respo
     const query = req.query as { startDate: string; endDate: string; skip: string; limit: string }
     logInfo(`getVehiclesRegisteredBetweenDates - query: ${JSON.stringify(query)}`)
 
-    const valitadion = ensuerVehicleRegisteredBetweenDatesIsValid({ ...query })
+    const valitadion = ensureVehicleRegisteredBetweenDatesIsValid({ ...query })
 
     if ('error' in valitadion) {
       res.status(400).json({
@@ -240,6 +242,94 @@ export const getVehiclesRegisteredBetweenDates = async (req: Request, res: Respo
     const vehicles = await getVehiclesRegisteredBetweenDatesService({
       startDate: new Date(startDate),
       endDate: new Date(endDate),
+      skip: skip,
+      limit: limit,
+    })
+
+    if (!vehicles) {
+      res.status(404).json({
+        success: false,
+        message: 'Vehicles not found',
+      })
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      data: vehicles,
+    })
+  } catch (error: any) {
+    console.log('error', error.message)
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+export const getVehiclesStolen = async (req: Request, res: Response) => {
+  try {
+    const query = req.query as { skip: string; limit: string }
+    logInfo(`getVehiclesStolen - query: ${JSON.stringify(query)}`)
+
+    const validation = ensureSkipAndLimitAreValid({ ...query })
+
+    if ('error' in validation) {
+      res.status(400).json({
+        success: false,
+        message: validation.error?.message || validation.error,
+      })
+      return
+    }
+
+    const { skip, limit } = validation
+
+    console.log('skip', skip)
+
+    const vehicles = await getVehiclesStolenService({
+      skip: skip,
+      limit: limit,
+    })
+
+    if (!vehicles) {
+      res.status(404).json({
+        success: false,
+        message: 'Vehicles not found',
+      })
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      data: vehicles,
+    })
+  } catch (error: any) {
+    console.log('error', error.message)
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+export const getVehiclesSeized = async (req: Request, res: Response) => {
+  try {
+    const query = req.query as { skip: string; limit: string }
+    logInfo(`getVehiclesSeized - query: ${JSON.stringify(query)}`)
+
+    const validation = ensureSkipAndLimitAreValid({ ...query })
+
+    if ('error' in validation) {
+      res.status(400).json({
+        success: false,
+        message: validation.error?.message || validation.error,
+      })
+      return
+    }
+
+    const { skip, limit } = validation
+
+    const vehicles = await getVehiclesStolenService({
       skip: skip,
       limit: limit,
     })

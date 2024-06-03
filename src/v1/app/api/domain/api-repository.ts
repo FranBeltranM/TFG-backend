@@ -5,6 +5,8 @@ import {
   VehicleObject,
   VehicleObjectFormatted,
   VehicleRegisteredInProvince,
+  VehicleSeized,
+  VehicleStolen,
 } from '@/v1/app/shared/domain/vehicle/vehicle-dto'
 
 export interface ApiRepository {
@@ -20,6 +22,20 @@ export interface ApiRepository {
     skip: number
     limit: number
   }): Promise<ResultsWithPagination<VehicleRegisteredInProvince> | null>
+  getStolenVehicles({
+    skip,
+    limit,
+  }: {
+    skip: number
+    limit: number
+  }): Promise<ResultsWithPagination<VehicleStolen> | null>
+  getSeizedVeihcles({
+    skip,
+    limit,
+  }: {
+    skip: number
+    limit: number
+  }): Promise<ResultsWithPagination<VehicleSeized> | null>
 
   // Vehicle and BrandModel
   getVehicleRegisteredBetweenDates({

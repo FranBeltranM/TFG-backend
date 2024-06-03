@@ -95,8 +95,9 @@ export type VehicleObjectFormatted = Omit<
 }
 
 export type VehicleRegisteredInProvince = Pick<VehicleObjectFormatted, 'bastidor_itv' | 'provincia_matriculacion'>
-
 export type VehicleRegisteredBetweenDates = Pick<VehicleObjectFormatted, 'bastidor_itv' | 'fecha_matricula'>
+export type VehicleStolen = Pick<VehicleObjectFormatted, 'bastidor_itv' | 'indicadores'>
+export type VehicleSeized = Pick<VehicleObjectFormatted, 'bastidor_itv' | 'indicadores'>
 
 // DTOs
 export type FechaMatriculaDTO = {

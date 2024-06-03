@@ -156,7 +156,7 @@ export const ensureVehicleRegisteredInProvinceIsValid = ({
   }
 }
 
-export const ensuerVehicleRegisteredBetweenDatesIsValid = ({
+export const ensureVehicleRegisteredBetweenDatesIsValid = ({
   startDate,
   endDate,
   skip,
@@ -236,6 +236,63 @@ export const ensuerVehicleRegisteredBetweenDatesIsValid = ({
     endDate: vehicleRegisteredBetweenDatesValidation.data.endDate,
     skip: +vehicleRegisteredBetweenDatesValidation.data.skip,
     limit: +vehicleRegisteredBetweenDatesValidation.data.limit,
+  }
+}
+
+export const ensureSkipAndLimitAreValid = ({ skip, limit }: { skip: string | null; limit: string | null }) => {
+  const skipAndLimitSchema = z.object({
+    skip: z
+      .string({
+        required_error: 'Skip is required',
+        invalid_type_error: 'Skip must be a string',
+      })
+      .min(1, {
+        message: 'Skip must be at least 1 character long',
+      }),
+    limit: z
+      .string({
+        required_error: 'Limit is required',
+        invalid_type_error: 'Limit must be a string',
+      })
+      .min(1, {
+        message: 'Limit must be at least 1 character long',
+      })
+      .max(2, {
+        message: 'Limit must be at most 2 characters long',
+      }),
+  })
+
+  const skipAndLimitValidation = skipAndLimitSchema.safeParse({
+    skip,
+    limit,
+  })
+
+  if (!skipAndLimitValidation.success) {
+    return {
+      error: skipAndLimitValidation.error.errors[0],
+    }
+  }
+
+  // Check if skip and limit are numbers
+  if (isNaN(+skipAndLimitValidation.data.skip)) {
+    return {
+      error: {
+        message: 'Skip must be a number',
+      } as z.ZodIssue,
+    }
+  }
+
+  if (isNaN(+skipAndLimitValidation.data.limit)) {
+    return {
+      error: {
+        message: 'Limit must be a number',
+      } as z.ZodIssue,
+    }
+  }
+
+  return {
+    skip: +skipAndLimitValidation.data.skip,
+    limit: +skipAndLimitValidation.data.limit,
   }
 }
 

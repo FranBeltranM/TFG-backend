@@ -1464,6 +1464,306 @@
         "summary": "Obtener un listado de vehiculos matriculados entre dos fechas",
         "tags": ["Vehicle"]
       }
+    },
+    "/api/v1/vehicles-seized": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Salto de página",
+            "in": "query",
+            "name": "skip",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Límite de resultados",
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "results": {
+                          "items": {
+                            "properties": {
+                              "bastidor_itv": {
+                                "type": "string"
+                              },
+                              "indicadores": {
+                                "items": {
+                                  "properties": {
+                                    "baja_definitiva": {
+                                      "type": "string"
+                                    },
+                                    "baja_telematica": {
+                                      "type": "string"
+                                    },
+                                    "baja_temporal": {
+                                      "type": "string"
+                                    },
+                                    "embargo": {
+                                      "type": "string"
+                                    },
+                                    "fecha": {
+                                      "type": "string"
+                                    },
+                                    "nuevo_usado": {
+                                      "type": "string"
+                                    },
+                                    "persona_fisica_juridica": {
+                                      "type": "string"
+                                    },
+                                    "precinto": {
+                                      "type": "string"
+                                    },
+                                    "renting": {
+                                      "type": "string"
+                                    },
+                                    "sustraccion": {
+                                      "type": "string"
+                                    },
+                                    "tutela": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado de Vehículos"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "message": "Skip is required",
+                      "success": false
+                    },
+                    {
+                      "message": "Limit is required",
+                      "success": false
+                    }
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Datos incorrectos"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Vehicles not found",
+                    "success": false
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Vehículos no encontrado"
+          }
+        },
+        "summary": "Obtener un listado de vehiculos marcados como embargados",
+        "tags": ["Vehicle"]
+      }
+    },
+    "/api/v1/vehicles-stolen": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Salto de página",
+            "in": "query",
+            "name": "skip",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Límite de resultados",
+            "in": "query",
+            "name": "limit",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "results": {
+                          "items": {
+                            "properties": {
+                              "bastidor_itv": {
+                                "type": "string"
+                              },
+                              "indicadores": {
+                                "items": {
+                                  "properties": {
+                                    "baja_definitiva": {
+                                      "type": "string"
+                                    },
+                                    "baja_telematica": {
+                                      "type": "string"
+                                    },
+                                    "baja_temporal": {
+                                      "type": "string"
+                                    },
+                                    "embargo": {
+                                      "type": "string"
+                                    },
+                                    "fecha": {
+                                      "type": "string"
+                                    },
+                                    "nuevo_usado": {
+                                      "type": "string"
+                                    },
+                                    "persona_fisica_juridica": {
+                                      "type": "string"
+                                    },
+                                    "precinto": {
+                                      "type": "string"
+                                    },
+                                    "renting": {
+                                      "type": "string"
+                                    },
+                                    "sustraccion": {
+                                      "type": "string"
+                                    },
+                                    "tutela": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Listado de Vehículos"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "message": "Skip is required",
+                      "success": false
+                    },
+                    {
+                      "message": "Limit is required",
+                      "success": false
+                    }
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Datos incorrectos"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Vehicles not found",
+                    "success": false
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Vehículos no encontrado"
+          }
+        },
+        "summary": "Obtener un listado de vehiculos marcados como robados",
+        "tags": ["Vehicle"]
+      }
     }
   }
 }

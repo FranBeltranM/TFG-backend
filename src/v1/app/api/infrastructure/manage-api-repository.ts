@@ -16,6 +16,8 @@ import {
   VehicleObject,
   VehicleObjectFormatted,
   VehicleRegisteredInProvince,
+  VehicleSeized,
+  VehicleStolen,
 } from '@/v1/app/shared/domain/vehicle/vehicle-dto'
 
 // Constants
@@ -175,6 +177,96 @@ export class ManageApiRepository implements ApiRepository {
     return {
       results: vehicles.map((vehicle) => vehicle) as VehicleObjectFormatted[],
       page: Math.ceil(skip / limit) + 1,
+    }
+  }
+
+  getStolenVehicles = async ({
+    skip,
+    limit,
+  }: {
+    skip: number
+    limit: number
+  }): Promise<ResultsWithPagination<VehicleStolen> | null> => {
+    if (!this.databaseConnection) {
+      logError('Error connecting to MongoDB')
+      return null
+    }
+
+    const totalVehicles = await VehicleDTO.countDocuments({ 'indicadores.sustraccion': 'S' }).exec() // Add '.exec()' to execute the query
+
+    const vehicles = await VehicleDTO.aggregate([
+      {
+        $match: { 'indicadores.sustraccion': 'S' },
+      },
+      {
+        $skip: skip,
+      },
+      {
+        $limit: limit,
+      },
+      {
+        $project: {
+          _id: 0,
+          bastidor_itv: 1,
+          indicadores: 1,
+        },
+      },
+    ])
+
+    if (!vehicles.length || !totalVehicles) {
+      return null
+    }
+
+    return {
+      results: vehicles,
+      total: totalVehicles,
+      page: Math.ceil(skip / limit) + 1,
+      totalPages: Math.ceil(totalVehicles / limit),
+    }
+  }
+
+  getSeizedVeihcles = async ({
+    skip,
+    limit,
+  }: {
+    skip: number
+    limit: number
+  }): Promise<ResultsWithPagination<VehicleSeized> | null> => {
+    if (!this.databaseConnection) {
+      logError('Error connecting to MongoDB')
+      return null
+    }
+
+    const totalVehicles = await VehicleDTO.countDocuments({ 'indicadores.embargo': 'SI' }).exec() // Add '.exec()' to execute the query
+
+    const vehicles = await VehicleDTO.aggregate([
+      {
+        $match: { 'indicadores.embargo': 'SI' },
+      },
+      {
+        $skip: skip,
+      },
+      {
+        $limit: limit,
+      },
+      {
+        $project: {
+          _id: 0,
+          bastidor_itv: 1,
+          indicadores: 1,
+        },
+      },
+    ])
+
+    if (!vehicles.length || !totalVehicles) {
+      return null
+    }
+
+    return {
+      results: vehicles,
+      total: totalVehicles,
+      page: Math.ceil(skip / limit) + 1,
+      totalPages: Math.ceil(totalVehicles / limit),
     }
   }
 

@@ -4,12 +4,15 @@ import { ManageApiRepository } from '@/v1/app/api/infrastructure/manage-api-repo
 // Application
 import { getBrandModelFromWMIandVDS, getBrandsList } from '@/v1/app/api/application/get/get-brand-model'
 import { getLastUpdateDate } from '@/v1/app/api/application/get/get-last-update-date'
+import { getSeizedVehicles } from '@/v1/app/api/application/get/get-seized-vehicles'
+import { getStolenVehicles } from '@/v1/app/api/application/get/get-stolen-vehicles'
 import {
   getVehicleFromVin,
   getVehicleFromVinResolved,
   getVehicleRegisteredInProvince,
 } from '@/v1/app/api/application/get/get-vehicle'
 import { getVehicleTechnicalDataFromMask } from '@/v1/app/api/application/get/get-vehicle-technical-data'
+import { getVehiclesRegisteredBetweenDates } from '@/v1/app/api/application/get/get-vehicles-registered-between-dates'
 
 // Application Constants
 import { getDefinitiveDeregistrationIndicator } from '@/v1/app/api/application/get/get-definitive-deregistration-indicator'
@@ -20,7 +23,6 @@ import { getPropulsionCode } from '@/v1/app/api/application/get/get-propulsion-c
 import { getProvinceCode } from '@/v1/app/api/application/get/get-province-code'
 import { getService } from '@/v1/app/api/application/get/get-service'
 import { getTypeCode } from '@/v1/app/api/application/get/get-type-code'
-import { getVehiclesRegisteredBetweenDates } from '@/v1/app/api/application/get/get-vehicles-registered-between-dates'
 
 // Repository
 const manageApiRepository = new ManageApiRepository()
@@ -58,6 +60,14 @@ export const getVehiclesRegisteredBetweenDatesService = async ({
   limit?: number
 }) => {
   return await getVehiclesRegisteredBetweenDates(manageApiRepository)({ startDate, endDate, skip, limit })
+}
+
+export const getVehiclesStolenService = async ({ skip, limit }: { skip?: number; limit?: number }) => {
+  return await getStolenVehicles(manageApiRepository)({ skip, limit })
+}
+
+export const getVehiclesSeizedService = async ({ skip, limit }: { skip?: number; limit?: number }) => {
+  return await getSeizedVehicles(manageApiRepository)({ skip, limit })
 }
 
 // BrandModels
