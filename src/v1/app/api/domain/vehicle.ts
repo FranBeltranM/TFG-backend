@@ -156,6 +156,89 @@ export const ensureVehicleRegisteredInProvinceIsValid = ({
   }
 }
 
+export const ensuerVehicleRegisteredBetweenDatesIsValid = ({
+  startDate,
+  endDate,
+  skip,
+  limit,
+}: {
+  startDate: string | null
+  endDate: string | null
+  skip: string | null
+  limit: string | null
+}) => {
+  const vehicleRegisteredBetweenDatesSchema = z.object({
+    startDate: z
+      .string({
+        required_error: 'Start date is required',
+        invalid_type_error: 'Start date must be a string',
+      })
+      .transform((str) => new Date(str)),
+    endDate: z
+      .string({
+        required_error: 'End date is required',
+        invalid_type_error: 'End date must be a string',
+      })
+      .transform((str) => new Date(str)),
+    skip: z
+      .string({
+        required_error: 'Skip is required',
+        invalid_type_error: 'Skip must be a string',
+      })
+      .min(1, {
+        message: 'Skip must be at least 1 character long',
+      }),
+    limit: z
+      .string({
+        required_error: 'Limit is required',
+        invalid_type_error: 'Limit must be a string',
+      })
+      .min(1, {
+        message: 'Limit must be at least 1 character long',
+      })
+      .max(2, {
+        message: 'Limit must be at most 2 characters long',
+      }),
+  })
+
+  const vehicleRegisteredBetweenDatesValidation = vehicleRegisteredBetweenDatesSchema.safeParse({
+    startDate,
+    endDate,
+    skip,
+    limit,
+  })
+
+  if (!vehicleRegisteredBetweenDatesValidation.success) {
+    return {
+      error: vehicleRegisteredBetweenDatesValidation.error.errors[0],
+    }
+  }
+
+  // Check if skip and limit are numbers
+  if (isNaN(+vehicleRegisteredBetweenDatesValidation.data.skip)) {
+    return {
+      error: {
+        message: 'Skip must be a number',
+      } as z.ZodIssue,
+    }
+  }
+
+  if (isNaN(+vehicleRegisteredBetweenDatesValidation.data.limit)) {
+    return {
+      error: {
+        message: 'Limit must be a number',
+      } as z.ZodIssue,
+    }
+  }
+
+  return {
+    startDate: vehicleRegisteredBetweenDatesValidation.data.startDate,
+    endDate: vehicleRegisteredBetweenDatesValidation.data.endDate,
+    skip: +vehicleRegisteredBetweenDatesValidation.data.skip,
+    limit: +vehicleRegisteredBetweenDatesValidation.data.limit,
+  }
+}
+
 export const formatVehicleDataResult = ({ vehicleData }: { vehicleData: VehicleObject }): VehicleObjectFormatted => {
   const {
     _id,

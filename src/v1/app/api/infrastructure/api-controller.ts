@@ -1,7 +1,11 @@
 import { Request, Response } from '@/helpers/middle.helper'
 
 // Domain
-import { ensureVehicleRegisteredInProvinceIsValid, ensureVehicleVinIsValid } from '@/v1/app/api/domain/vehicle'
+import {
+  ensuerVehicleRegisteredBetweenDatesIsValid,
+  ensureVehicleRegisteredInProvinceIsValid,
+  ensureVehicleVinIsValid,
+} from '@/v1/app/api/domain/vehicle'
 
 // Application
 import { logInfo } from '@/helpers/utils'
@@ -221,13 +225,23 @@ export const getVehiclesRegisteredBetweenDates = async (req: Request, res: Respo
     const query = req.query as { startDate: string; endDate: string; skip: string; limit: string }
     logInfo(`getVehiclesRegisteredBetweenDates - query: ${JSON.stringify(query)}`)
 
-    const { startDate, endDate, skip, limit } = query
+    const valitadion = ensuerVehicleRegisteredBetweenDatesIsValid({ ...query })
+
+    if ('error' in valitadion) {
+      res.status(400).json({
+        success: false,
+        message: valitadion.error?.message ?? valitadion.error,
+      })
+      return
+    }
+
+    const { startDate, endDate, skip, limit } = valitadion
 
     const vehicles = await getVehiclesRegisteredBetweenDatesService({
       startDate: new Date(startDate),
       endDate: new Date(endDate),
-      skip: parseInt(skip),
-      limit: parseInt(limit),
+      skip: skip,
+      limit: limit,
     })
 
     if (!vehicles) {

@@ -1393,6 +1393,72 @@
               }
             },
             "description": "Listado de Vehículos"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "message": "Start date is required",
+                      "success": false
+                    },
+                    {
+                      "message": "End date is required",
+                      "success": false
+                    },
+                    {
+                      "message": "Skip is required",
+                      "success": false
+                    },
+                    {
+                      "message": "Limit is required",
+                      "success": false
+                    },
+                    {
+                      "message": "Province is not a valid province code",
+                      "success": false
+                    },
+                    {
+                      "message": "Province is required",
+                      "success": false
+                    }
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Datos incorrectos"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Vehicles not found",
+                    "success": false
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Vehículos no encontrado"
           }
         },
         "summary": "Obtener un listado de vehiculos matriculados entre dos fechas",

@@ -35,7 +35,7 @@ import { ApiRepository } from '@/v1/app/api/domain/api-repository'
 import { formatBrandModelResult } from '@/v1/app/api/domain/brand-model'
 import { formatVehicleDataResult } from '@/v1/app/api/domain/vehicle'
 import { formatVehicleTechnicalDataResult } from '@/v1/app/api/domain/vehicle-technical-data'
-import { ResultsWithPagination } from '../../shared/domain/types'
+import { ResultsWithPagination } from '@/v1/app/shared/domain/types'
 
 export class ManageApiRepository implements ApiRepository {
   private databaseConnection: Connection | null = null
