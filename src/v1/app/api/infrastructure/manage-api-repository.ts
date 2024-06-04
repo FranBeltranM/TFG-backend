@@ -118,7 +118,13 @@ export class ManageApiRepository implements ApiRepository {
         $project: {
           _id: 0,
           bastidor_itv: 1,
-          codigo_provincia_matriculacion: 1,
+          fecha_matricula: {
+            $cond: {
+              if: { $eq: ['$fecha_primera_matriculacion', []] },
+              then: '$fecha_matricula',
+              else: '$fecha_primera_matriculacion',
+            },
+          },
         },
       },
     ])

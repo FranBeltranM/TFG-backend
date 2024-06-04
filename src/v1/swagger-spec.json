@@ -845,13 +845,10 @@
                               "bastidor_itv": {
                                 "type": "string"
                               },
-                              "codigo_provincia_matriculacion": {
+                              "fecha_matricula": {
                                 "items": {
                                   "properties": {
                                     "fecha": {
-                                      "type": "string"
-                                    },
-                                    "valor": {
                                       "type": "string"
                                     }
                                   },
