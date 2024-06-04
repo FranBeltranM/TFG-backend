@@ -26,6 +26,7 @@ import {
   getVehicleRegisteredInProvinceService,
   getVehicleTechnicalDataFromMaskService,
   getVehiclesRegisteredBetweenDatesService,
+  getVehiclesSeizedService,
   getVehiclesStolenService,
 } from '@/v1/app/api/infrastructure/api-services'
 
@@ -329,7 +330,7 @@ export const getVehiclesSeized = async (req: Request, res: Response) => {
 
     const { skip, limit } = validation
 
-    const vehicles = await getVehiclesStolenService({
+    const vehicles = await getVehiclesSeizedService({
       skip: skip,
       limit: limit,
     })

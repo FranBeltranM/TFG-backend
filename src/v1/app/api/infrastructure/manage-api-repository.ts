@@ -109,6 +109,9 @@ export class ManageApiRepository implements ApiRepository {
         $match: { 'codigo_provincia_matriculacion.valor': province },
       },
       {
+        $sort: { 'fecha_matricula.fecha': -1 },
+      },
+      {
         $skip: skip,
       },
       {
@@ -214,7 +217,18 @@ export class ManageApiRepository implements ApiRepository {
         $project: {
           _id: 0,
           bastidor_itv: 1,
-          indicadores: 1,
+          indicadores: {
+            $arrayElemAt: [
+              {
+                $filter: {
+                  input: '$indicadores',
+                  as: 'indicador',
+                  cond: { $eq: ['$$indicador.sustraccion', 'S'] },
+                },
+              },
+              0,
+            ],
+          },
         },
       },
     ])
@@ -259,7 +273,18 @@ export class ManageApiRepository implements ApiRepository {
         $project: {
           _id: 0,
           bastidor_itv: 1,
-          indicadores: 1,
+          indicadores: {
+            $arrayElemAt: [
+              {
+                $filter: {
+                  input: '$indicadores',
+                  as: 'indicador',
+                  cond: { $eq: ['$$indicador.embargo', 'SI'] },
+                },
+              },
+              0,
+            ],
+          },
         },
       },
     ])
