@@ -248,9 +248,11 @@ export const getVehiclesRegisteredBetweenDates = async (req: Request, res: Respo
     })
 
     if (!vehicles) {
-      res.status(404).json({
-        success: false,
-        message: 'Vehicles not found',
+      res.status(200).json({
+        success: true,
+        data: {
+          results: [],
+        },
       })
       return
     }

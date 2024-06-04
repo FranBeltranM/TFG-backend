@@ -112,7 +112,7 @@ export class ManageApiRepository implements ApiRepository {
         $sort: { 'fecha_matricula.fecha': -1 },
       },
       {
-        $skip: skip,
+        $skip: totalVehicles < skip ? skip : skip - limit,
       },
       {
         $limit: limit,
@@ -208,7 +208,7 @@ export class ManageApiRepository implements ApiRepository {
         $match: { 'indicadores.sustraccion': 'S' },
       },
       {
-        $skip: skip,
+        $skip: totalVehicles < skip ? skip : skip - limit,
       },
       {
         $limit: limit,
@@ -264,7 +264,7 @@ export class ManageApiRepository implements ApiRepository {
         $match: { 'indicadores.embargo': 'SI' },
       },
       {
-        $skip: skip,
+        $skip: totalVehicles < skip ? skip : skip - limit,
       },
       {
         $limit: limit,
