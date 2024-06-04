@@ -285,8 +285,6 @@ export const getVehiclesStolen = async (req: Request, res: Response) => {
 
     const { skip, limit } = validation
 
-    console.log('skip', skip)
-
     const vehicles = await getVehiclesStolenService({
       skip: skip,
       limit: limit,
