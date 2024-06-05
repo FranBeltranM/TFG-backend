@@ -10,7 +10,21 @@ El objetivo principal de este proyecto es facilitar la búsqueda de información
 
 ## Características Principales
 
-# TBD
+1. Obtener marca y modelo de un vehículo desde un bastidor.
+
+2. Obtener listado marcas de vehículos disponibles en la BBDD.
+
+3. Obtención de constantes (Código de provincia, Código de Propulsión, étc.).
+
+4. Obtener información de un vehículo (marca-modelo, datos técnicos, actividad del vehículo) desde un bastidor.
+
+5. Obtener vehículos matriculados en una provincia.
+
+6. Obtener vehículos marcados como robados.
+
+7. Obtener vehículos matriculados entre 2 fechas determinadas.
+
+8. Obtener vehículos marcados como embargados.
 
 ## Créditos
 
