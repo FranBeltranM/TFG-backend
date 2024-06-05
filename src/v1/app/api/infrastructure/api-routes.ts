@@ -3,6 +3,7 @@ import {
   getBrandModelFromVin,
   getBrandsList,
   getDefinitiveDeregistrationIndicator,
+  getLastUpdateDate,
   getOriginCodeVehicleInspection,
   getPlateClassCode,
   getProcessKey,
@@ -37,3 +38,5 @@ export const routesConstants = router
   .get('/constants/get-propulsion-code', getPropulsionCode)
   .get('/constants/get-province-code', getProvinceCode)
   .get('/constants/get-type-code', getTypeCode)
+
+export const routesDB = router.get('/db/last-date-inserted', getLastUpdateDate)

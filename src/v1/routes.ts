@@ -1,4 +1,4 @@
-import { routesBrandModel, routesConstants, routesVehicle } from '@/v1/app/api/infrastructure/api-routes'
+import { routesBrandModel, routesConstants, routesDB, routesVehicle } from '@/v1/app/api/infrastructure/api-routes'
 import { routesDefault } from '@/v1/app/default/default.routes'
 
-export const routesV1 = [routesDefault, routesVehicle, routesBrandModel, routesConstants]
+export const routesV1 = [routesDefault, routesVehicle, routesBrandModel, routesConstants, routesDB]

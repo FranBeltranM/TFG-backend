@@ -433,6 +433,54 @@
         "tags": ["Constants"]
       }
     },
+    "/api/v1/db/last-date-inserted": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Última fecha insertada en la BBDD"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Last update date not found",
+                    "success": false
+                  },
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No se ha obtenido la fecha"
+          }
+        },
+        "summary": "Obtener la última fecha de datos insertados",
+        "tags": ["DB"]
+      }
+    },
     "/api/v1/vehicle": {
       "get": {
         "parameters": [

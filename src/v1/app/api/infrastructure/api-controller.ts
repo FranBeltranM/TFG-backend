@@ -14,6 +14,7 @@ import {
   getBrandModelFromWmiAndVdsService,
   getBrandsListService,
   getDefinitiveDeregistrationIndicatorService,
+  getLastUpdateDateService,
   getOriginCodeVehicleInspectionService,
   getPlateClassCodeService,
   getProcessKeyService,
@@ -611,6 +612,31 @@ export const getTypeCode = (_req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       data: typeCode,
+    })
+  } catch (error: any) {
+    console.log('error', error.message)
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+export const getLastUpdateDate = async (_req: Request, res: Response) => {
+  try {
+    const lastUpdateDate = await getLastUpdateDateService()
+
+    if (!lastUpdateDate) {
+      res.status(404).json({
+        success: false,
+        message: 'Last update date not found',
+      })
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      data: lastUpdateDate,
     })
   } catch (error: any) {
     console.log('error', error.message)
