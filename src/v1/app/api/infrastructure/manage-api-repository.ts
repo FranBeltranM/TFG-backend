@@ -109,9 +109,6 @@ export class ManageApiRepository implements ApiRepository {
         $match: { 'codigo_provincia_matriculacion.valor': province },
       },
       {
-        $sort: { 'fecha_matricula.fecha': -1 },
-      },
-      {
         $skip: totalVehicles > skip ? skip : skip - limit,
       },
       {
